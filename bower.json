@@ -1,0 +1,19 @@
+{
+  "name": "greenfield",
+  "version": "0.0.0",
+  "homepage": "https://github.com/azangru/2015-06-greenfield",
+  "authors": [
+    "Christopher Griffis",
+    "Cliff Saporta Cheng",
+    "Syed Jafri",
+    "Andrey Azov <andrey.azov@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

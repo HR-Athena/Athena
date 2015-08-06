@@ -1,0 +1,27 @@
+{
+  "name": "greenfield",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:HR-Athena/2015-06-greenfield.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HR-Athena/2015-06-greenfield/issues"
+  },
+  "engines": {
+    "node": "0.12.2"
+  },
+  "dependencies": {
+    "express": "~4.13.3",
+    "serve-favicon": "~2.3.0",
+    "debug": "~2.2.0"
+  }
+}
