@@ -1,20 +1,25 @@
 //Home Controller
 
-var app = angular.module('congressmanprofile', [])
+var app = angular.module('congressmanprofile', []);
 
 app.controller ('homeController',['$scope','Home' , function($scope, name, Home){
   
   var selectedPerson = {};
+  var recentSeaches = {};
 
-  $scope.member={};
+  $scope.member = {};
   $scope.allMembers = {};
+  $scope.trendingMembers = [];
   
   /*******************************************
    * Capture the input from the user
    ******************************************/
 
   $scope.selectPerson = function(newPerson){
+    // newPerson will be an object:
+    // {id: id, firstName: FirstName, lastName: LastName, ??} 
     selectedPerson = newPerson;
+    $scope.trendingMembers.push(selectedPerson[id]);
   }
 
   /*******************************************

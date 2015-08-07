@@ -1,34 +1,46 @@
 // Profile Controller
-var app = angular.module('congressmanprofile', [])
 
-app.controller ('profileController', function($scope, name){
+app.controller ('profileController',['$scope','Home' , function($scope, name, Profile){
   
-  $scope.profile = {};
+  var selectedPerson = {};
 
-  $scope.getMember = function(id){
+  $scope.allMembers = app.allMembers;
+  $scope.profile1 = app.member; // TODO: Check if OK
+  $scope.profile2 = {};
 
+ /*******************************************
+   * When user adds a second profile
+   ******************************************/
+
+  $scope.selectPerson = function(newPerson){
+    selectedPerson = newPerson;
   }
 
+ /*******************************************
+   * Load one Member Profile from Factory
+   ******************************************/
 
-  $scope.getMemberVotes = function(id) {
-
+  $scope.getMember = function(){
+    Home.getMember(selectedPerson[id])
+        .then(function(data){
+          $scope.member=data;
+        }).catch(function(err){
+          throw err;
+        });        
   }
 
-});
+   /*******************************************
+   * Load votes for the member from Factory,
+   * add to member object
+   ******************************************/
 
-
-/*****************************************************
- * Bill Controller - (move to sep file)
- ****************************************************/
-app.controller ('billController', function($scope){
-  
-  $scope.bill = {
-
+  $scope.getMemberVotes = function(){
+    Home.getMemberVotes(selectedPerson[id])
+        .then(function(data){
+          $scope.member.votes=[data];
+        }).catch(function(err){
+          throw err;
+        });
   }
 
-  $scope.getBillInformation = function(id){
-
-  }
-
-
-});
+}])
