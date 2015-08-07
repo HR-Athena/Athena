@@ -1,5 +1,6 @@
 var govTrack = require('govtrack-node');
 var Promise = require('bluebird');
+// var utils = require('./utilController');
 
 var promiseGov = Promise.promisifyAll(govTrack);
 // for (var keys in promiseGov) console.log(keys);
@@ -7,7 +8,7 @@ var promiseGov = Promise.promisifyAll(govTrack);
 
 
 module.exports = {
-  // makes call to GovTrack API 
+  
   getAllMembers: function(callback) {
     // parameter finds only current members of Congress in API request
     promiseGov.findRoleAsync({  current: true, 
@@ -23,8 +24,7 @@ module.exports = {
   },
 
   getMember: function(id, callback) {
-    promiseGov.findPersonAsync({  id: id
-                                })
+    promiseGov.findPersonAsync({id: id})
       .then(function(res){
         callback(res);
       })
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   getMemberVotes: function(person_id, callback) {
-    promiseGov.findVoteVoterAsync({person: person_id, limit: 600})
+    promiseGov.findVoteVoterAsync({person: person_id, sort: '-created', limit: 600})
       .then(function(res){
         callback(res.objects);
       })
