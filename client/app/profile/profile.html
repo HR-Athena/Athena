@@ -1,1 +1,41 @@
 <!-- Profile View Template -->
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="member-data">
+    
+  </div>
+  <div class="bill-votes">
+    <div>
+      <input type="text" placeholder="Filter Bills by Keyword" value="keyword" />
+    </div>
+    <div class="bills" ng-repeat="bill in bills">
+      <div>
+        <span class="bill-vote">
+          <p>
+          {{ bill.vote }}
+          </p>
+        </span>
+      <div>
+        <span class="bill-question">
+          <p>
+            <a href="{{ bill.thomas_link }}">{{ bill.question }}</a>
+          </p>
+        </span>
+        <span class="bill-details">
+          <p>
+            {{ bill.question_details }}
+          </p>
+        </span>
+        <span class="bill_status">
+          <p>
+            {{ bill.current_status_label }}
+          </p>
+        </span>
+      </div>
+      </div>
+    </div> <!--End bills -->
+    <div class="graph"> 
+      
+    </div> <!-- End Graph -->
+  </div>
+  
+</div>

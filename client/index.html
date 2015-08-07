@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html ng-app>
+<html lang="en" ng-app>
 <head>
   <meta charset="utf-8">
   <title>Congressman Profiler</title>
+  <script src="lib/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css"></script>
+  <link rel="stylesheet" type="text/css" href="assets/style.css">
 </head>
   <body>
     <section class="header">
-
+      <div class="jumbotron col-sm-8 col-sm-offset-2">
+        <h1 class="text-center">Congressman Profiler</h1>
+        <h4 class="text-center">See how your congressman voted on issues important to you!</h4>
+      </div>
     </section>
     <section class="main">
       <div ng-view></div>
     </section>
     <section class="footer">
-
+      <div class="col-sm-8 col-sm-offset-2">
+        <p>Proudly made using Open Data: <a href="https://www.govtrack.us/developers"></a></p>
+      </div>
     </section>
   </body>
 </html>
