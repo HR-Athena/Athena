@@ -6,6 +6,16 @@ var congressmanprofile = angular.module('congressmanprofile', [
   ])
 
 // Router for app
-.config() {
+.config(function($routeProvider, $httpProvider) {
+  $routeProvider
+  .when('/', {
+    templateUrl: 'app/home/home.html',
+    controller: 'homeController'
+  })
+  .when('/profile', {
+    templateUrl: 'app/profile/profile.html',
+    controller: 'profileController'
+  });
 
-}
+});
+
