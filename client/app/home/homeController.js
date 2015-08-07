@@ -9,6 +9,7 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
 
   $scope.member = {};
   $scope.allMembers = {};
+  $scope.billDetails = {};
   $scope.trendingMembers = [];
   
   /*******************************************
@@ -29,7 +30,7 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
   $scope.getAllMembers = function(){
     Home.getAllMembers()
         .then(function(data){
-          $scope.allMembers=data;
+          $scope.allMembers = data;
         }).catch(function(err){
           throw err;
         });
@@ -42,7 +43,7 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
   $scope.getMember = function(){
     Home.getMember(selectedPerson[id])
         .then(function(data){
-          $scope.member=data;
+          $scope.member = data;
         }).catch(function(err){
           throw err;
         });        
@@ -56,10 +57,27 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
   $scope.getMemberVotes = function(){
     Home.getMemberVotes(selectedPerson[id])
         .then(function(data){
-          $scope.member.votes=[data];
+          $scope.member.votes = data;
         }).catch(function(err){
           throw err;
         });
+  }
+
+  /*******************************************
+   * Load Bill details from Factory
+   ******************************************/
+
+  $scope.getBillDetails = function(){
+    for (var bill_id in $scope.member.votes){
+      Home.getBillDetails(bill_id)
+          .then(function(data){
+            if (!(bill_id in $scope.billDetails)){
+              $scope.billDetails[bill_id] = data;
+            }
+          }).catch(function(err){
+            throw err;
+          });
+    }
   }
 
   /*******************************************
@@ -112,6 +130,20 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
     });
   }
 
+   /*******************************************
+   * Load Bill Details from server
+   ******************************************/
+
+  function getBillDetails(id){
+    return $http({
+      method: 'GET',
+      url: '/bill/'+id,
+    })
+    .then(function(res){
+      return res.data;
+    });
+  }
+
   /*******************************************
    * Expose factory functions to the controller
    ******************************************/
@@ -119,7 +151,8 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
   return({ 
     getAllMembers: getAllMembers,
     getMember: getMember,
-    getMemberVotes: getMemberVotes 
+    getMemberVotes: getMemberVotes,
+    getBillDetails: getBillDetails 
   });
 
 }]);

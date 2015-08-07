@@ -4,9 +4,9 @@ app.controller ('profileController',['$scope','Home' , function($scope, name, Pr
   
   var selectedPerson = {};
 
-  $scope.allMembers = app.allMembers;
-  $scope.profile1 = app.member; // TODO: Check if OK
-  $scope.profile2 = {};
+  $scope.allMembers = app.allMembers; // TODO: Check if OK
+  $scope.member1 = app.member; // TODO: Check if OK
+  $scope.member2 = {};
 
  /*******************************************
    * When user adds a second profile
@@ -23,7 +23,7 @@ app.controller ('profileController',['$scope','Home' , function($scope, name, Pr
   $scope.getMember = function(){
     Home.getMember(selectedPerson[id])
         .then(function(data){
-          $scope.member=data;
+          $scope.member2 = data;
         }).catch(function(err){
           throw err;
         });        
@@ -37,7 +37,7 @@ app.controller ('profileController',['$scope','Home' , function($scope, name, Pr
   $scope.getMemberVotes = function(){
     Home.getMemberVotes(selectedPerson[id])
         .then(function(data){
-          $scope.member.votes=[data];
+          $scope.member.votes = data;
         }).catch(function(err){
           throw err;
         });
