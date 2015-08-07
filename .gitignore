@@ -5,3 +5,6 @@ client/lib
 
 build/
 dist/
+
+.floo
+.flooignore
