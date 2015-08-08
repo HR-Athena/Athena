@@ -1,6 +1,14 @@
 /*
 This Gulpfile was created based on this tutorial:
 http://mindthecode.com/lets-build-an-angularjs-app-with-browserify-and-gulp/
+
+Browserify-prod gulp task was created using this recipe
+(it takes much longer than browserify-dev to run, but produces js about 10 times smaller):
+https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-uglify-sourcemap.md
+
+Also, interesting workflow to consider:
+https://quickleft.com/blog/setting-up-a-clientside-javascript-project-with-gulp-and-browserify/
+
 */
 
 'use strict';
@@ -8,7 +16,12 @@ http://mindthecode.com/lets-build-an-angularjs-app-with-browserify-and-gulp/
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
-    browserify = require('gulp-browserify'),
+    gulpBrowserify = require('gulp-browserify'),
+    browserify = require('browserify'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    uglify = require('gulp-uglify'),
+    sourcemaps = require('gulp-sourcemaps'),
     concat = require('gulp-concat'),
     clean = require('gulp-clean'),
     sass = require('gulp-sass'),
@@ -34,19 +47,43 @@ gulp.task('lint', function() {
   .pipe(jshint.reporter('default'));
 });
 
-// Browserify task
-gulp.task('browserify', function() {
+
+// // First browserify task — quickly produces large concatenated javascript
+gulp.task('browserify-dev', function() {
   // Single point of entry (make sure not to src ALL your files, browserify will figure it out for you)
   gulp.src(['./client/app.js'])
-  .pipe(browserify({
+  .pipe(gulpBrowserify({
     insertGlobals: true,
     debug: true
   }))
   // Bundle to a single file
-  .pipe(concat('app-bundle.js'))
+  .pipe(concat('app.bundle.js'))
   // Output it to the dist folder
   .pipe(gulp.dest('public/scripts'));
 });
+
+
+// Second browserify task — produces minified javascript
+
+gulp.task('browserify-prod', function () {
+  // set up the browserify instance on a task basis
+  var b = browserify({
+    entries: './client/app.js',
+    debug: true
+  });
+
+  return b.bundle()
+    .pipe(source('app.bundle.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+        // Add transformation tasks to the pipeline here.
+        .pipe(uglify())
+        .on('error', gutil.log)
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('public/scripts'));
+});
+
+
 
 
 // Views task
@@ -76,7 +113,7 @@ gulp.task('watch', ['lint'], function() {
   // When script files change — run lint and browserify
   gulp.watch([paths.scripts],[
     'lint',
-    'browserify'
+    'browserify-dev'
   ]);
   gulp.watch([paths.index, paths.partials], [
     'views'
@@ -85,5 +122,7 @@ gulp.task('watch', ['lint'], function() {
     'styles'
   ]);
 });
+
+gulp.task('build', ['lint', 'browserify-prod', 'views', 'styles']);
 
 gulp.task('default', ['watch']);
