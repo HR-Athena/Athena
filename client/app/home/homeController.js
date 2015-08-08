@@ -21,7 +21,7 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
     // {id: id, firstName: FirstName, lastName: LastName, ??} 
     selectedPerson = newPerson;
     $scope.trendingMembers.push(selectedPerson[id]);
-  }
+  };
 
   /*******************************************
    * Loads All Members Name and ID from Factory
@@ -34,7 +34,7 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
         }).catch(function(err){
           throw err;
         });
-  }
+  };
 
   /*******************************************
    * Load one Member Profile from Factory
@@ -47,7 +47,7 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
         }).catch(function(err){
           throw err;
         });        
-  }
+  };
 
   /*******************************************
    * Load votes for the member from Factory,
@@ -61,7 +61,7 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
         }).catch(function(err){
           throw err;
         });
-  }
+  };
 
   /*******************************************
    * Load Bill details from Factory
@@ -78,7 +78,7 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
             throw err;
           });
     }
-  }
+  };
 
   /*******************************************
    * Load all members upon controller load

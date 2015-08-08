@@ -29,8 +29,8 @@ var gulp = require('gulp'),
 
 
 var paths = {
-    scripts: ['client/**/*.js', '!client/lib/**/*,js'],
-    styles: ['./client/assets/**/*.css', './client/assets/**/*.scss'],
+    scripts: ['client/**/*.js'], // previously had: '!client/lib/**/*.js'
+    styles: ['./client/assets/**/*.css', './client/assets/**/*.scss', './client/lib/**/*.css'],
     index: './client/index.html',
     partials: ['client/app/**/*.html', '!client/index.html']
     // distDev: './dist.dev',
@@ -125,4 +125,4 @@ gulp.task('watch', ['lint'], function() {
 
 gulp.task('build', ['lint', 'browserify-prod', 'views', 'styles']);
 
-gulp.task('default', ['watch']);
+gulp.task('default', ['lint', 'browserify-dev', 'views', 'styles', 'watch']);

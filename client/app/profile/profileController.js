@@ -14,7 +14,7 @@ app.controller ('profileController',['$scope','Home' , function($scope, name, Pr
 
   $scope.selectPerson = function(newPerson){
     selectedPerson = newPerson;
-  }
+  };
 
  /*******************************************
    * Load one Member Profile from Factory
@@ -27,7 +27,7 @@ app.controller ('profileController',['$scope','Home' , function($scope, name, Pr
         }).catch(function(err){
           throw err;
         });        
-  }
+  };
 
    /*******************************************
    * Load votes for the member from Factory,
@@ -41,6 +41,6 @@ app.controller ('profileController',['$scope','Home' , function($scope, name, Pr
         }).catch(function(err){
           throw err;
         });
-  }
+  };
 
-}])
+}]);
