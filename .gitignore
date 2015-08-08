@@ -8,3 +8,6 @@ client/lib
 public/
 build/
 dist/
+
+.floo
+.flooignore
