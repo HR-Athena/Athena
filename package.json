@@ -27,7 +27,38 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "browserify": "~11.0.1",
+    "browserify-shim": "~3.8.10",
     "chai": "~3.2.0",
-    "mocha": "~2.2.5"
-  }
+    "mocha": "~2.2.5",
+    "connect-livereload": "~0.5.3",
+    "gulp-concat": "~2.6.0",
+    "gulp-livereload": "~3.8.0",
+    "gulp-embedlr": "~0.5.2",
+    "express": "~4.13.3",
+    "gulp-clean": "~0.3.1",
+    "gulp-util": "~3.0.6",
+    "gulp": "~3.9.0",
+    "tiny-lr": "~0.1.6",
+    "gulp-jshint": "~1.11.2",
+    "gulp-browserify": "~0.5.1",
+    "gulp-autoprefixer": "~2.3.1",
+    "gulp-sass": "~2.0.4"
+  }, 
+  "browser": {
+    "jquery": "./client/lib/jquery/dist/jquery.js",
+    "angular": "./client/lib/angular/angular.js"
+  },
+  "browserify": {
+    "transform": [ "browserify-shim" ]
+  },
+    "browserify-shim": {
+      "jquery": {
+        "exports": "$"
+      },
+      "angular": {
+        "exports": "angular",
+        "depends": "jquery"
+      }
+    }
 }

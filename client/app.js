@@ -1,11 +1,6 @@
+var angular = require('./lib/angular/angular.js');
+
 /*Entry Point for routing*/
-var congressmanprofile = angular.module('congressmanprofile', [
-  // add in controller dep
-  //ex congressmanprofile.home
-  'ui-router'
-  ])
+var congressmanprofile = angular.module('congressmanprofile', []);
 
 // Router for app
-.config() {
-
-}
