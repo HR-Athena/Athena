@@ -9,6 +9,9 @@ https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-uglify-source
 Also, interesting workflow to consider:
 https://quickleft.com/blog/setting-up-a-clientside-javascript-project-with-gulp-and-browserify/
 
+For cleaning the public folder, check out this repo:
+https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md
+
 */
 
 'use strict';
@@ -124,5 +127,6 @@ gulp.task('watch', ['lint'], function() {
 });
 
 gulp.task('build', ['lint', 'browserify-prod', 'views', 'styles']);
+gulp.task('build-heroku', ['browserify-prod', 'views', 'styles']);
 
 gulp.task('default', ['lint', 'browserify-dev', 'views', 'styles', 'watch']);
