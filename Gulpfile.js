@@ -29,6 +29,7 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'); // not necessary, but adds prefixes for all browsers
+var Server = require('karma').Server; // this is for testing using Karma
 
 
 var paths = {
@@ -51,7 +52,7 @@ gulp.task('lint', function() {
 });
 
 
-// // First browserify task — quickly produces large concatenated javascript
+// First browserify task — quickly produces large concatenated javascript
 gulp.task('browserify-dev', function() {
   // Single point of entry (make sure not to src ALL your files, browserify will figure it out for you)
   gulp.src(['./client/app.js'])
@@ -86,9 +87,6 @@ gulp.task('browserify-prod', function () {
     .pipe(gulp.dest('public/scripts'));
 });
 
-
-
-
 // Views task
 gulp.task('views', function() {
   // Get index.html
@@ -102,6 +100,8 @@ gulp.task('views', function() {
   .pipe(gulp.dest('public/views/'));
 });
 
+// Creates css files out of scss and puts them in public/styles folder
+// (also copies css files from the client folder to public/styles folder)
 gulp.task('styles', function() {
   gulp.src(paths.styles)
   // The onerror handler prevents Gulp from crashing when you make a mistake in your SASS
@@ -111,6 +111,14 @@ gulp.task('styles', function() {
   .pipe(gulp.dest('public/styles/'));
 });
 
+// Runs tests for the client side once and exits
+// see this repo for inspiration: https://github.com/karma-runner/gulp-karma
+gulp.task('test-client', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
 
 gulp.task('watch', ['lint'], function() {
   // When script files change — run lint and browserify
