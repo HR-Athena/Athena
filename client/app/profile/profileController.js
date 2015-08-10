@@ -1,14 +1,13 @@
 // Profile Controller
 
-var angular = require('angular');
-var app = angular.module('congressmanprofile');
+module.exports = function profileController($scope, Home){
 
-app.controller ('profileController',['$scope','Home' , function($scope, Home){
+  console.log('I am profile controller');
   
   var selectedPerson = {};
 
-  $scope.allMembers = app.allMembers; // TODO: Check if OK
-  $scope.member1 = app.member; // TODO: Check if OK
+  $scope.allMembers = {}; // app.allMembers; // TODO: Check if OK
+  $scope.member1 = {}; // app.member; // TODO: Check if OK
   $scope.member2 = {};
 
  /*******************************************
@@ -46,4 +45,4 @@ app.controller ('profileController',['$scope','Home' , function($scope, Home){
         });
   };
 
-}]);
+};
