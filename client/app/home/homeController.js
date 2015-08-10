@@ -5,7 +5,6 @@
 var Home = require('./homeFactory.js');
 
 module.exports = function homeController($scope, Home){
-  console.log('I am home controller');
   
   var selectedPerson = {};
   var recentSeaches = {};
