@@ -40,7 +40,10 @@
     "gulp-uglify": "~1.2.0",
     "vinyl-source-stream": "~1.1.0",
     "gulp-sourcemaps": "~1.5.2",
-    "vinyl-buffer": "~1.0.0"
+    "vinyl-buffer": "~1.0.0",
+    "angular-mocks": "~1.4.3",
+    "angular": "~1.4.3",
+    "angular-ui-router": "~0.2.15"
   },
   "devDependencies": {
     "chai": "~3.2.0",
@@ -50,23 +53,5 @@
     "karma-mocha": "~0.2.0",
     "karma-chrome-launcher": "~0.2.0",
     "karma-browserify": "~4.3.0"
-  },
-  "browser": {
-    "jquery": "./client/lib/jquery/dist/jquery.js",
-    "angular": "./client/lib/angular/angular.js"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {
-    "jquery": {
-      "exports": "$"
-    },
-    "angular": {
-      "exports": "angular",
-      "depends": "jquery"
-    }
   }
 }

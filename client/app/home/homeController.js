@@ -1,8 +1,11 @@
 //Home Controller
+// var angular = require('angular');
+// var app = angular.module('congressmanprofile');
 
-var app = angular.module('congressmanprofile', []);
+var Home = require('./homeFactory.js');
 
-app.controller ('homeController',['$scope','Home' , function($scope, name, Home){
+module.exports = function homeController($scope, Home){
+  console.log('I am home controller');
   
   var selectedPerson = {};
   var recentSeaches = {};
@@ -85,75 +88,4 @@ app.controller ('homeController',['$scope','Home' , function($scope, name, Home)
    ******************************************/
   $scope.getAllMembers();
 
-}])
-.factory('Home',['$http', function($http){
-
-  /*******************************************
-   * Loads All Members Name and ID from server
-   ******************************************/
-  
-  function getAllMembers(){
-    return $http({
-      method: 'GET',
-      url: '/members/all',
-    })
-    .then(function(res){
-      return res.data;
-    });
-  }
-
-  /*******************************************
-   * Load one Member Profile from server
-   ******************************************/
-
-  function getMember(id){
-    return $http({
-      method: 'GET',
-      url: '/members/'+id,
-    })
-    .then(function(res){
-      return res.data;
-    });
-  }
-
-  /*******************************************
-   * Load Member's Vote from server
-   ******************************************/
-
-  function getMemberVotes(id){
-    return $http({
-      method: 'GET',
-      url: '/votes/'+id,
-    })
-    .then(function(res){
-      return res.data;
-    });
-  }
-
-   /*******************************************
-   * Load Bill Details from server
-   ******************************************/
-
-  function getBillDetails(id){
-    return $http({
-      method: 'GET',
-      url: '/bill/'+id,
-    })
-    .then(function(res){
-      return res.data;
-    });
-  }
-
-  /*******************************************
-   * Expose factory functions to the controller
-   ******************************************/
-
-  return({ 
-    getAllMembers: getAllMembers,
-    getMember: getMember,
-    getMemberVotes: getMemberVotes,
-    getBillDetails: getBillDetails 
-  });
-
-}]);
-
+};

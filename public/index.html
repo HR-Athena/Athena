@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="congressmanprofile">
 <head>
   <meta charset="utf-8">
   <title>Congressman Profiler</title>
+  <base href="/" />
   <link rel="stylesheet" href="styles/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="styles/style.css">
-  <script src="/scripts/app-bundle.js"></script>
+  <script src="/scripts/app.bundle.js"></script>
 </head>
   <body>
     <section class="header">
@@ -15,7 +16,7 @@
       </div>
     </section>
     <section class="main">
-      <div ng-view></div>
+      <div ui-view></div>
     </section>
     <section class="footer">
       <div class="col-sm-8 col-sm-offset-2">

@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var url = require('url');
 var favicon = require('serve-favicon');
 var members = require('./memberController');
 var bills = require('./billController');
@@ -66,6 +67,7 @@ var billInfo = {};
 
 // on a GET request to '/members/*' we see if it is a call for all members or a specific member
 app.get('/members/*', function(req, res){
+  console.log(url.parse(req.url));
   var pathObj = path.parse(req.url);
   // if call for all, send back JSON of memberList created on server start
   if (pathObj.base === 'all') {

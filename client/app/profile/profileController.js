@@ -1,6 +1,9 @@
 // Profile Controller
 
-app.controller ('profileController',['$scope','Home' , function($scope, name, Profile){
+var angular = require('angular');
+var app = angular.module('congressmanprofile');
+
+app.controller ('profileController',['$scope','Home' , function($scope, Home){
   
   var selectedPerson = {};
 
