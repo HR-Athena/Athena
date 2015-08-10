@@ -1,5 +1,5 @@
 var express = require('express');
-var path = require('path');
+var pathParse = require('path-parse'); // polyfill for older Node versions
 var favicon = require('serve-favicon');
 var members = require('./memberController');
 var bills = require('./billController');
@@ -7,7 +7,7 @@ var utils = require('./utilController');
 
 var app = express();
 
-app.use(express.static(__dirname + "/../client"));
+app.use(express.static(__dirname + "/../public"));
 app.use(favicon(__dirname + '/../client/favicon.ico'));
 
 /* memberList will eventually look like this after initial API call resolves
@@ -66,7 +66,7 @@ var billInfo = {};
 
 // on a GET request to '/members/*' we see if it is a call for all members or a specific member
 app.get('/members/*', function(req, res){
-  var pathObj = path.parse(req.url);
+  var pathObj = pathParse(req.url);
   // if call for all, send back JSON of memberList created on server start
   if (pathObj.base === 'all') {
     res.send(memberList);
@@ -83,7 +83,7 @@ app.get('/members/*', function(req, res){
 // we use path to parse out the base of the url which will be the member_ID as a string
 // sends back memberVotes JSON to client
 app.get('/votes/*', function(req, res){
-  var pathObj = path.parse(req.url);
+  var pathObj = pathParse(req.url);
   var member_id = Number(pathObj.base);
   members.getMemberVotes(member_id, function(objects){
     objects.forEach(function(listing){
@@ -97,7 +97,7 @@ app.get('/votes/*', function(req, res){
 // on a GET request to 'bills/*', we are counting on the * to be a valid number for a bill_ID
 // we use path to parse out the base of the url which will be the bill_ID as a string
 app.get('/bills/*', function(req, res){
-  var pathObj = path.parse(req.url);
+  var pathObj = pathParse(req.url);
   var bill_id = Number(pathObj.base);
   bills.getBillInformation(bill_id, function(listing){ // populates billInfo object with bill data
     billInfo = utils.makeBillInfo(listing);

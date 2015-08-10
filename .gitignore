@@ -5,6 +5,7 @@ client/lib
 .floo
 .flooignore
 
+public/
 build/
 dist/
 
@@ -12,3 +13,4 @@ dist/
 .flooignore
 
 d3Testing.html
+
