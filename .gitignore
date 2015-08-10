@@ -2,6 +2,15 @@ node_modules/
 bower_components/
 client/lib
 *.log
+.floo
+.flooignore
 
+public/
 build/
 dist/
+
+.floo
+.flooignore
+
+d3Testing.html
+

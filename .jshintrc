@@ -1,0 +1,9 @@
+{
+    "node": true,
+    "esnext": true,
+    "bitwise": true,
+    "regexp": true,
+    "smarttabs": true,
+    "white": true,
+    "loopfunc": true
+}

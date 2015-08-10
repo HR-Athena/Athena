@@ -1,0 +1,55 @@
+<!-- Profile View Template -->
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="member-data">
+    <div class="profile-picture">
+      <img src="https://www.govtrack.us/data/photos/{{ profile.id }}-200px.jpeg">
+    </div>
+    <div class="profile-data">
+      <span class="profile-name">{{ member.name }}</span>
+      <span class="profile-birthdate">{{ member.birthdate }}</span>
+      <span class="profile-party">{{ member.party }}</span>
+      <span class="profile-description">{{ member.description }}</span>
+      <div class="profile-social-media">
+        <span>{{ member.twitter }}</span>
+        <span>{{ member.youtube}}</span>
+        <span>{{ member.email }}</span>
+        <span>{{ member.phone }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="bill-votes">
+    <div>
+      <input type="text" placeholder="Filter Bills by Keyword" ng-model="billKeyword" />
+    </div>
+    <div class="bills" ng-repeat="bill in bills | filter:billKeyword ">
+      <div>
+        <span class="bill-vote">
+          <p>
+          {{ bill.vote }}
+          </p>
+        </span>
+      <div>
+        <span class="bill-question">
+          <p>
+            <a href="{{ bill.thomas_link }}">{{ bill.question }}</a>
+          </p>
+        </span>
+        <span class="bill-details">
+          <p>
+            {{ bill.question_details }}
+          </p>
+        </span>
+        <span class="bill_status">
+          <p>
+            {{ bill.current_status_label }}
+          </p>
+        </span>
+      </div>
+      </div>
+    </div> <!--End bills -->
+    <div class="graph"> 
+      
+    </div> <!-- End Graph -->
+  </div>
+  
+</div>
