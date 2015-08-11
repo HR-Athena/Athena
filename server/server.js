@@ -38,10 +38,13 @@ var memberProfile = {};
 
 /* memberVotes will look like this after a GET request to a specific member's voting record
   { 
-    bill_id1: 'voteResult', (bill_id is a number, voteResult is a string of 'Yea', 'Nay', or 'Not Voting')
-    bill_id2: 'voteResult', (maybe other voteResults are possible but I haven't seen them)
-    bill_id3: 'voteResult',
-    bill_id4: 'voteResult', ...
+    bill_id1: {
+                vote: STRING_OF_VOTE,
+                bill_question: STRING_OF_QUESTION,
+                bill_question_details: STRING_OF_DETAILS,
+                result: STRING_OF_RESULT
+              },
+    bill_id2: {...}
   }
 */
 var memberVotes = {};
@@ -88,7 +91,7 @@ app.get('/votes/*', function(req, res){
   members.getMemberVotes(member_id, function(objects){
     objects.forEach(function(listing){
       var bill_id = listing.vote.id;
-      memberVotes[bill_id] = listing.option.value;
+      memberVotes[bill_id] = utils.makeVoteInfo(listing);
     });
     res.send(memberVotes);
   });
