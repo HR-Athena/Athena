@@ -83,6 +83,7 @@ app.get('/members/*', function(req, res){
 // we use path to parse out the base of the url which will be the member_ID as a string
 // sends back memberVotes JSON to client
 app.get('/votes/*', function(req, res){
+  console.log("Got to votes");
   var pathObj = pathParse(req.url);
   var member_id = Number(pathObj.base);
   members.getMemberVotes(member_id, function(objects){
@@ -97,10 +98,13 @@ app.get('/votes/*', function(req, res){
 // on a GET request to 'bills/*', we are counting on the * to be a valid number for a bill_ID
 // we use path to parse out the base of the url which will be the bill_ID as a string
 app.get('/bills/*', function(req, res){
+  console.log("Got req:", req.url);
   var pathObj = pathParse(req.url);
   var bill_id = Number(pathObj.base);
   bills.getBillInformation(bill_id, function(listing){ // populates billInfo object with bill data
+    console.log("listing: ", listing);
     billInfo = utils.makeBillInfo(listing);
+    console.log("billinfo: ", billInfo);
     res.send(billInfo); // sends back JSON object to client
   });
 });

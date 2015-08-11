@@ -13,6 +13,7 @@ module.exports = function homeFactory($http){
       url: '/members/all',
     })
     .then(function(res){
+      console.log(res);
       return res.data;
     });
   }
@@ -52,7 +53,7 @@ module.exports = function homeFactory($http){
   function getBillDetails(id){
     return $http({
       method: 'GET',
-      url: '/bill/'+id,
+      url: '/bills/'+id,
     })
     .then(function(res){
       return res.data;

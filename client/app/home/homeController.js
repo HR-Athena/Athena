@@ -4,13 +4,14 @@
 
 var Home = require('./homeFactory.js');
 
-module.exports = function homeController($scope, Home){
-  
+
+module.exports = function homeController($scope, $state, Home){
+
   var selectedPerson = {};
   var recentSeaches = {};
 
   $scope.member = {};
-  $scope.allMembers = {};
+  $scope.allMembers = [];
   $scope.billDetails = {};
   $scope.trendingMembers = [];
   
@@ -18,9 +19,9 @@ module.exports = function homeController($scope, Home){
    * Capture the input from the user
    ******************************************/
 
-  $scope.selectPerson = function(newPerson){
+   $scope.selectPerson = function(newPerson){
     // newPerson will be an object:
-    // {id: id, firstName: FirstName, lastName: LastName, ??} 
+    // {id: id, firstName: FirstName, lastName: LastName, Title: title} 
     selectedPerson = newPerson;
     $scope.trendingMembers.push(selectedPerson[id]);
   };
@@ -29,26 +30,29 @@ module.exports = function homeController($scope, Home){
    * Loads All Members Name and ID from Factory
    ******************************************/
 
-  $scope.getAllMembers = function(){
+   $scope.getAllMembers = function(){
     Home.getAllMembers()
-        .then(function(data){
-          $scope.allMembers = data;
-        }).catch(function(err){
-          throw err;
-        });
+    .then(function(data){
+      for (var id in data){
+        $scope.allMembers.push(data[id]);
+      }
+    }).catch(function(err){
+      throw err;
+    });
   };
 
   /*******************************************
    * Load one Member Profile from Factory
    ******************************************/
 
-  $scope.getMember = function(){
-    Home.getMember(selectedPerson[id])
-        .then(function(data){
-          $scope.member = data;
-        }).catch(function(err){
-          throw err;
-        });        
+   $scope.getMember = function(){
+    Home.getMember(300002 /*selectedPerson[id]*/)
+    .then(function(data){
+      console.log(data);
+      $scope.member = data;
+    }).catch(function(err){
+      throw err;
+    });        
   };
 
   /*******************************************
@@ -56,35 +60,42 @@ module.exports = function homeController($scope, Home){
    * add to member object
    ******************************************/
 
-  $scope.getMemberVotes = function(){
+   $scope.getMemberVotes = function(){
     Home.getMemberVotes(selectedPerson[id])
-        .then(function(data){
-          $scope.member.votes = data;
-        }).catch(function(err){
-          throw err;
-        });
+    .then(function(data){
+      $scope.member.votes = data;
+    }).catch(function(err){
+      throw err;
+    });
   };
 
   /*******************************************
    * Load Bill details from Factory
    ******************************************/
 
-  $scope.getBillDetails = function(){
+   $scope.getBillDetails = function(){
     for (var bill_id in $scope.member.votes){
       Home.getBillDetails(bill_id)
-          .then(function(data){
-            if (!(bill_id in $scope.billDetails)){
-              $scope.billDetails[bill_id] = data;
-            }
-          }).catch(function(err){
-            throw err;
-          });
+      .then(function(data){
+        if (!(bill_id in $scope.billDetails)){
+          $scope.billDetails[bill_id] = data;
+        }
+      }).catch(function(err){
+        throw err;
+      });
     }
+  };
+
+  $scope.gotoMember = function(){
+    var id = $scope.memberSearch.id;
+    $state.go('profile', {id:id});
+
   };
 
   /*******************************************
    * Load all members upon controller load
    ******************************************/
-  $scope.getAllMembers();
+   $scope.getAllMembers();
 
-};
+
+ };
