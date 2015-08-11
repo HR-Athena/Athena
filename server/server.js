@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var pathParse = require('path-parse'); // polyfill for older Node versions
 var favicon = require('serve-favicon');
 var members = require('./memberController');
@@ -6,6 +7,10 @@ var bills = require('./billController');
 var utils = require('./utilController');
 
 var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + "/../public"));
 app.use(favicon(__dirname + '/../client/favicon.ico'));
@@ -106,6 +111,10 @@ app.get('/bills/*', function(req, res){
     billInfo = utils.makeBillInfo(listing);
     res.send(billInfo); // sends back JSON object to client
   });
+});
+
+app.get('/*', function(req, res){
+  res.render('index.ejs');
 });
 
 // this expression runs on server start, retrieves a list of current members and writes it to memberList
