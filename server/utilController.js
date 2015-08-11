@@ -47,6 +47,15 @@ module.exports = {
     };
   },
 
+  makeVoteInfo: function(listing) {
+    return {
+      vote: listing.option.value,
+      bill_question: listing.vote.question,
+      bill_question_details: listing.vote.question_details,
+      result: listing.vote.result
+    };
+  },
+
   // takes in a JSON listing of a listing from govTrack Vote API, returns like:
   /*  {
         question: 'Cloture on S. 1881: A bill to prohibit Federal funding of Planned Parenthood Federation of America.',

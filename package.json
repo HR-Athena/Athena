@@ -33,6 +33,7 @@
     "d3": "~3.5.6",
     "debug": "~2.2.0",
     "del": "~1.2.0",
+    "ejs": "~2.3.3",
     "express": "~4.13.3",
     "govtrack-node": "^0.2.0",
     "gulp": "~3.9.0",
@@ -54,6 +55,7 @@
     "vinyl-buffer": "~1.0.0",
     "vinyl-source-stream": "~1.1.0",
     "vinyl-transform": "~1.0.0"
+
   },
   "devDependencies": {
     "chai": "~3.2.0",
