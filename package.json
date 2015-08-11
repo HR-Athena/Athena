@@ -51,7 +51,8 @@
     "karma-mocha": "~0.2.0",
     "karma-chrome-launcher": "~0.2.0",
     "karma-browserify": "~4.3.0",
-    "bower": "~1.4.1"
+    "bower": "~1.4.1",
+    "ejs": "~2.3.3"
   },
   "devDependencies": {
     "chai": "~3.2.0",

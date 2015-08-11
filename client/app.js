@@ -14,7 +14,8 @@ var congressmanprofile = angular.module('congressmanprofile', [
   profile.name
   ])
 // Router for app
-.config(function($stateProvider) {
+.config(function($locationProvider, $stateProvider) {
+  $locationProvider.html5Mode(true);
   $stateProvider
     .state('home', {
       url: '/home',
