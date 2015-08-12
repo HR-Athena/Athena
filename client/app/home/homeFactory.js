@@ -2,6 +2,10 @@
 module.exports = function homeFactory($http){
 
   console.log('I am factory!');
+  var allMembers = [];
+  getAllMembers();
+
+
 
   /*******************************************
    * Loads All Members Name and ID from server
@@ -13,8 +17,9 @@ module.exports = function homeFactory($http){
       url: '/members/all',
     })
     .then(function(res){
-      console.log(res);
-      return res.data;
+      for (var id in res.data){
+        allMembers.push(res.data[id]);
+      }
     });
   }
 
@@ -64,7 +69,8 @@ module.exports = function homeFactory($http){
    * Expose factory functions to the controller
    ******************************************/
 
-  return({ 
+  return({
+    allMembers: allMembers, 
     getAllMembers: getAllMembers,
     getMember: getMember,
     getMemberVotes: getMemberVotes,

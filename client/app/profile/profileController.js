@@ -5,37 +5,28 @@ module.exports = function profileController($scope, $stateParams, Home){
   console.log('I am profile controller');
   
   var selectedPerson = {};
-  
 
   $scope.memberId=$stateParams.id;
 
-  $scope.allMembers = {}; // app.allMembers; // TODO: Check if OK
-  $scope.member = {}; 
+  $scope.allMembers = Home.allMembers;
+  $scope.member = {};
+  $scope.secondMember = {}; 
   
-  getMember($scope.memberId);
-  getMemberVotes($scope.memberId);
-
-
-  //$scope.member2 = {};
-
- /*******************************************
-   * When user adds a second profile
-   ******************************************/
-
-   $scope.selectPerson = function(newPerson){
-    selectedPerson = newPerson;
-  };
+  getMember($scope.memberId, $scope.member);
+  //getMemberVotes($scope.memberId);
 
  /*******************************************
    * Load one Member Profile from Factory
    ******************************************/
 
-   function getMember(id){
+   function getMember(id, member){
     Home.getMember(id)
-    .then(function(data){
-      $scope.member = data;
-      $scope.member.age=calculateAge(new Date($scope.member.birthday));
-
+    .then(function(data){      
+      member.data = data;
+      member.data.age=calculateAge(new Date(member.data.birthday));
+      return member;
+    }).then(function(member){
+      getMemberVotes(member);
     }).catch(function(err){
       throw err;
     });        
@@ -46,10 +37,10 @@ module.exports = function profileController($scope, $stateParams, Home){
    * add to member object
    ******************************************/
 
-   function getMemberVotes(id){
-    Home.getMemberVotes(id)
-    .then(function(data){
-      $scope.member.votes = data;
+   function getMemberVotes(member){
+    Home.getMemberVotes(member.data.id)
+    .then(function(votes){
+      member.data.votes = votes;
     }).catch(function(err){
       throw err;
     });
@@ -61,6 +52,15 @@ module.exports = function profileController($scope, $stateParams, Home){
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
+
+  /*******************************************
+   * Load Second Member Profile from Factory
+   ******************************************/
+   $scope.loadMember = function (){
+    var newId = $scope.addMember.id;
+    getMember(newId, $scope.secondMember);
+   };
+
 };
 
 
