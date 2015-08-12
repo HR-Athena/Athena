@@ -24,7 +24,7 @@
     <!-- Second Member -->
     <div ng-if="secondMember.data.id" class="member-data">
       <div class="second-member-data col-sm-4">
-          <img src="https://www.govtrack.us/data/photos/{{ secondMember.data.id }}-100px.jpeg">
+          <img src="https://www.govtrack.us/data/photos/{{ secondMember.data.id }}-100px.jpeg" >
           <div class="second-profile-data">        
             <div class="profile-name"><b>{{ secondMember.data.firstname }} {{ secondMember.data.lastname }}</b></div>
             <div class="profile-birthdate">{{ secondMember.data.age }} Years Old</div>
@@ -45,6 +45,7 @@
       <input type="text" class="form-control" placeholder="Filter Bills by Keyword" ng-model="billKeyword" />
     </div>
     <div class="bills col-sm-10 col-sm-offset-1" ng-repeat="bill in member.data.votes | filter:billKeyword | limitTo: 3">
+
       <div class="bill col-sm-12">
           <span class="col-sm-1 member-vote vote-left">
             {{ bill.vote }}
@@ -67,7 +68,7 @@
           </span>
         </div>
           <span class="col-sm-1 vote-right member-vote">
-            {{ bill.vote }}
+            {{ secondMember.vote}}
           </span>
       </div>
     </div> <!--End bills -->
