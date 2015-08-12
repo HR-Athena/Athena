@@ -14,7 +14,8 @@ module.exports = {
       id: listing.person.id,
       firstName: listing.person.firstname,
       lastName: listing.person.lastname,
-      title: listing.person.name
+      title: listing.person.name,
+      role: listing.role_type
     };
   },
 
@@ -38,14 +39,15 @@ module.exports = {
       firstname: listing.firstname,
       lastname: listing.lastname,
       fullname: listing.name,
-      description: listing.roles[0].description,
-      party: listing.roles[0].party,
+      description: listing.roles[listing.roles.length - 1].description,
+      party: listing.roles[listing.roles.length - 1].party,
+      role: listing.roles[listing.roles.length - 1].role_type,
       birthday: listing.birthday,
-      enddate: listing.roles[0].enddate,
+      enddate: listing.roles[listing.roles.length - 1].enddate,
       twitterid: listing.twitterid,
       youtubeid: listing.youtubeid,
-      website: listing.roles[0].website,
-      phone: listing.roles[0].phone
+      website: listing.roles[listing.roles.length - 1].website,
+      phone: listing.roles[listing.roles.length - 1].phone
     };
   },
 
