@@ -1,58 +1,54 @@
 <!-- Profile View Template -->
 <div class="col-sm-8 col-sm-offset-2">
-  <div class="member-data">
-    <div class="profile-picture">
+  <div class="second-member-data col-sm-4">
       <img src="https://www.govtrack.us/data/photos/{{ member.data.id }}-100px.jpeg">
-    </div>
-    <div class="profile-data">
-      
-      <div class="profile-name"><b>{{ member.data.firstname }} {{ member.data.lastname }}</b></div>
-      <div class="profile-birthdate">{{ member.data.age }} Years Old</div>
-      <div class="profile-party">{{ member.data.party }}</div>
-      <div class="profile-description">{{ member.data.description }}</div>
-      <div class="profile-social-media">
-
-        <span ng-if="member.twitterid">Twitter: {{ member.data.twitterid }}</span>
-        <span ng-if="member.youtubeid">Youtube: {{ member.data.youtubeid}}</span>
-        <span ng-if="member.phone">Phone: {{ member.data.phone }}</span>
+      <div class="second-profile-data">        
+        <div class="profile-name"><b>{{ member.data.firstname }} {{ member.data.lastname }}</b></div>
+        <div class="profile-birthdate">{{ member.data.age }} Years Old</div>
+        <div class="profile-party">{{ member.data.party }}</div>
+        <div class="profile-description">{{ member.data.description }}</div>
+        <div class="profile-social-media">
+          <span ng-if="member.twitterid">Twitter: {{ member.data.twitterid }}</span>
+          <span ng-if="member.youtubeid">Youtube: {{ member.data.youtubeid}}</span>
+          <span ng-if="member.phone">Phone: {{ member.data.phone }}</span>
+        </div>
       </div>
     </div>
+    <div class="profile-addMember col-sm-3 col-sm-offset-5">
+       <input class="form-control input-sm" type="text" placeholder="Search by Congress Member Name" ng-model="addMember" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter: $viewValue | limitTo:5" />
+      <button class="btn btn-default btn-sm" ng-click="loadMember()"> Add Member </button> 
+    </div>
   </div>
-  <div class="profile-addMember">
-     <input type="text" placeholder="Search by Congress Member Name" ng-model="addMember" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter: $viewValue | limitTo:5" />
-    <button ng-click="loadMember()"> Add Member </button> 
-  </div>
- 
 
-  <div class="bill-votes">
+  <div class="bill-votes col-sm-8 col-sm-offset-2">
     <div class="bill-search col-sm-8 col-sm-offset-2">
       <input type="text" class="form-control" placeholder="Filter Bills by Keyword" ng-model="billKeyword" />
     </div>
-    <div class="bills" ng-repeat="bill in member.data.votes | filter:billKeyword | limitTo: 3">
-      <div>
-        <span class="bill-vote">
-          <p>
-          {{ bill.vote }}
-          {{ bill.id}}
-          </p>
-        </span>
-      <div>
-        <span class="bill-question">
-          <p>
-            <a href="{{ bill.thomas_link }}">{{ bill.bill_question }}</a>
-          </p>
-        </span>
-        <span class="bill-details">
-          <p>
-            {{ bill.bill_question_details }}
-          </p>
-        </span>
-        <span class="bill_status">
-          <p>
-            {{ bill.result }}
-          </p>
-        </span>
-      </div>
+    <div class="bills col-sm-10 col-sm-offset-1" ng-repeat="bill in member.data.votes | filter:billKeyword | limitTo: 3">
+      <div class="bill col-sm-12">
+          <span class="col-sm-1 member-vote vote-left">
+            {{ bill.vote }}
+          </span>
+        <div class="bill_text col-sm-8 col-sm-offset-1">
+          <span class="bill-question">
+            <p>
+              <a href="{{ bill.thomas_link }}">{{ bill.bill_question }}</a>
+            </p>
+          </span>
+          <span class="bill-details">
+            <p>
+              Details: {{ bill.bill_question_details }}
+            </p>
+          </span>
+          <span class="bill_status">
+            <p>
+              Result: {{ bill.result }}
+            </p>
+          </span>
+        </div>
+          <span class="col-sm-1 vote-right member-vote">
+            {{ bill.vote }}
+          </span>
       </div>
     </div> <!--End bills -->
 

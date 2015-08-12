@@ -1,14 +1,8 @@
 <!-- Home View-->
-<<<<<<< HEAD
-<div class="col-sm-8 col-sm-offset-2"> 
-  <div class="col-sm-8 col-sm-offset-4 member-search">
-    <input type="text" class="form-control" placeholder="Search by Congress Member Name" ng-model="memberSearch" />
-=======
 <div class="col-sm-8 col-sm-offset-2" > 
-  <div class="col-sm-4 col-sm-offset-2">
-    <input type="text" placeholder="Search by Congress Member Name" ng-model="memberSearch" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter: $viewValue | limitTo:5" />
-    <button ng-click="gotoMember()"> Search </button> 
->>>>>>> 9a5d05dd593306c08e9a6b9e737de6a823afda71
+  <div class="col-sm-6 col-sm-offset-3 member-search">
+    <input type="text" class="form-control" placeholder="Search by Congress Member Name" ng-model="memberSearch" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter: $viewValue | limitTo:5" />
+    <button class="btn btn-default" ng-click="gotoMember()"> Search </button> 
     <div class="members" ng-hide"!model.length || selected">
       <div class="member"  ng-click="getMember(member.id)">
         <p class="member_name">{{ member.name }}</p>
