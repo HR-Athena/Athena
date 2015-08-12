@@ -1,0 +1,170 @@
+/*
+Colors
+*/
+
+$red: #ee4035;
+$orange: #f37736;
+$tan: #fdf498;
+$green: #7bc043;
+$blue: #0392cf;
+$gray: #aaaaaa;
+
+
+/*
+Font
+*/
+
+$font-stack: Helvetica, sans-serif;
+
+/*
+Mixins
+*/
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+body {
+  font: 100% $font-stack;
+}
+
+.header {
+  margin: 30px auto;
+}
+
+.main {
+  padding-top: 15px;
+}
+
+/*
+Home Template Style
+*/
+.member-search {
+  display: inline;
+  margin-top: 100px;
+  margin-bottom: 50px;
+    
+    input {
+      width: 100%;
+      height: 30px;
+    }
+
+    button {
+      float: right;
+      margin: 5px auto;
+    }
+}
+
+/*
+Profile Template Style
+*/
+.member-data, .second-member-data {
+  display: inline-block;
+
+  img {
+    @include border-radius(20px);
+  }
+}
+
+.second-profile-data {
+  margin: 15px auto;
+  float: left;
+
+  .profile-name {
+    font-size: 150%;
+    margin: 5px;
+  }
+
+  .profile-birthdate, .profile-party, .profile-description {
+    font-size: 125%;
+    margin: 5px;
+  }
+}
+
+.profile-data {
+  margin: 15px auto;
+  float: right;
+  text-align: right;
+
+  .profile-name {
+    font-size: 150%;
+    margin: 5px;
+  }
+
+  .profile-birthdate, .profile-party, .profile-description {
+    font-size: 125%;
+    margin: 5px;
+  }
+}
+
+/*
+Bills Styling
+*/
+.bill-votes {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.profile-addMember {
+  input {
+    margin: 25px 0 5px 0;
+  }
+
+  button {
+    margin: 2px auto; 
+    float: right;
+  }
+}
+
+.bill-search {
+  margin-bottom: 15px;
+}
+
+.member-vote {
+  position: relative;
+  display: inline-block;
+  font-size: 120%;
+  margin-top: 15px;
+  margin-left: 20px;
+  width: 50px;
+  height: 30px;
+  outline: 1px solid red;
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.vote-left {
+  float: left;
+}
+
+.vote-right {
+  float: right;
+  margin-top: 15px;
+  margin-right: 20px;
+}
+
+.bill {
+  text-align: center;
+  margin: 10px 0 0 5px;
+  padding: 5px;
+  border: 1px solid $gray;
+  @include border-radius(25px); 
+
+
+  .bill-question {
+    font-size: 110%;
+  }
+
+  .bill-details {
+    font-size: 110%;
+  }
+
+  .bill_status {
+    font-size: 110%;
+  }
+}
