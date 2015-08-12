@@ -3,17 +3,15 @@
 module.exports = function profileController($scope, $stateParams, Home){
 
   console.log('I am profile controller');
-  
-  var selectedPerson = {};
 
-  $scope.memberId=$stateParams.id;
+  var memberId1=$stateParams.id;
 
   $scope.allMembers = Home.allMembers;
   $scope.member = {};
   $scope.secondMember = {}; 
   
-  getMember($scope.memberId, $scope.member);
-  //getMemberVotes($scope.memberId);
+  getMember(memberId1, $scope.member);
+ 
 
  /*******************************************
    * Load one Member Profile from Factory
@@ -57,8 +55,8 @@ module.exports = function profileController($scope, $stateParams, Home){
    * Load Second Member Profile from Factory
    ******************************************/
    $scope.loadMember = function (){
-    var newId = $scope.addMember.id;
-    getMember(newId, $scope.secondMember);
+    var memberId2 = $scope.addMember.id;
+    getMember(memberId2, $scope.secondMember);
    };
 
 };

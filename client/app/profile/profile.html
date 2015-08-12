@@ -33,7 +33,6 @@
         <span class="bill-vote">
           <p>
           {{ bill.vote }}
-          {{ bill.id}}
           </p>
         </span>
       <div>
@@ -56,6 +55,26 @@
       </div>
     </div> <!--End bills -->
 
+    <!-- Second Member -->
+  <div ng-if="secondMember.data.id" class="member-data">
+  <hr>
+    <div class="profile-picture">
+      <img src="https://www.govtrack.us/data/photos/{{ secondMember.data.id }}-100px.jpeg">
+    </div>
+    <div class="profile-data">
+      
+      <div class="profile-name"><b>{{ secondMember.data.firstname }} {{ secondMember.data.lastname }}</b></div>
+      <div class="profile-birthdate">{{ secondMember.data.age }} Years Old</div>
+      <div class="profile-party">{{ secondMember.data.party }}</div>
+      <div class="profile-description">{{ secondMember.data.description }}</div>
+      <div class="profile-social-media">
+
+        <span ng-if="secondMember.twitterid">Twitter: {{ secondMember.data.twitterid }}</span>
+        <span ng-if="secondMember.youtubeid">Youtube: {{ secondMember.data.youtubeid}}</span>
+        <span ng-if="secondMember.phone">Phone: {{ secondMember.data.phone }}</span>
+      </div>
+    </div>
+  </div> <!-- End Second Member -->
     <div class="graph"> 
       
     </div> <!-- End Graph -->

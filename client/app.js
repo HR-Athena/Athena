@@ -1,6 +1,8 @@
 var angular = require('angular');
 require('angular-ui-router');
 require('angular-ui-bootstrap');
+require('angular-animate');
+require('angular-loading-bar');
 var home = require('./app/home');
 var profile = require('./app/profile');
 
@@ -13,6 +15,8 @@ var congressmanprofile = angular.module('congressmanprofile', [
   //ex congressmanprofile.home
   'ui.router',
   'ui.bootstrap',
+  'angular-loading-bar', 
+  'ngAnimate',
   home.name,
   profile.name
   ])
