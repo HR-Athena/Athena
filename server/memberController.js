@@ -13,7 +13,7 @@ module.exports = {
     // parameter finds only current members of Congress in API request
     promiseGov.findRoleAsync({  current: true, 
                                 limit: 600, 
-                                fields: 'person__id,person__firstname,person__lastname,person__name' 
+                                fields: 'person__id,person__firstname,person__lastname,person__name,role_type' 
                               })
       .then(function(res){
         callback(res.objects);
