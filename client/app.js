@@ -21,7 +21,7 @@ var congressmanprofile = angular.module('congressmanprofile', [
   $locationProvider.html5Mode(true);
   $stateProvider
     .state('home', {
-      url: '/home',
+      url: '/',
       templateUrl: 'views/home/home.html',
       controller: 'homeController'
     })

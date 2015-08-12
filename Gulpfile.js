@@ -89,10 +89,10 @@ gulp.task('browserify-prod', function () {
 
 // Views task
 gulp.task('views', function() {
-  // Get index.html
-  gulp.src(paths.index)
-  // Put it in the dist folder
-  .pipe(gulp.dest('public/'));
+  // // Get index.html
+  // gulp.src(paths.index)
+  // // Put it in the dist folder
+  // .pipe(gulp.dest('public/'));
 
   // Any other view files from app/views
   gulp.src(paths.partials)
