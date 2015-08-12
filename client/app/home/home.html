@@ -1,14 +1,14 @@
 <!-- Home View-->
 <div class="col-sm-8 col-sm-offset-2"> 
-  <div class="col-sm-4 col-sm-offset-2">
-    <input type="text" placeholder="Search by Congress Member Name" ng-model="memberSearch" />
+  <div class="col-sm-8 col-sm-offset-4 member-search">
+    <input type="text" class="form-control" placeholder="Search by Congress Member Name" ng-model="memberSearch" />
     <div class="members" ng-hide"!model.length || selected">
       <div class="member" ng-repeat="member in members | filter:memberSearch track by $index" ng-click="getMember(member.id)">
         <p class="member_name">{{ member.name }}</p>
       </div>
     </div>
   </div>
-  <div class="col-sm-4 col-sm-offset-2">
+  <div class="col-sm-8 col-sm-offset-2">
     <h3 class="text-center">Most Recent Searches</h3>
     <div class="profiles" ng-repeat="profile in trendingProfiles">
       <div class="home-profile">

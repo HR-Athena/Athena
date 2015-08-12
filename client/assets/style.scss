@@ -1,0 +1,42 @@
+/*
+Colors
+*/
+
+$red: #ee4035;
+$orange: #f37736;
+$tan: #fdf498;
+$green: #7bc043;
+$blue: #0392cf;
+$gray: #aaaaaa;
+
+$font-stack: Helvetica, sans-serif;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+body {
+  font: 100% $font-stack;
+}
+
+.header {
+  margin: 50px auto;
+}
+
+.main {
+
+}
+
+.member-search .bill-search {
+
+  margin-top: 40px;
+  margin-bottom: 50px;
+
+  input {
+    width: 50%;
+    height: 30px;
+  }
+}

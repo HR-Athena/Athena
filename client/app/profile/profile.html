@@ -18,8 +18,8 @@
     </div>
   </div>
   <div class="bill-votes">
-    <div>
-      <input type="text" placeholder="Filter Bills by Keyword" ng-model="billKeyword" />
+    <div class="bill-search col-sm-8 col-sm-offset-2">
+      <input type="text" class="form-control" placeholder="Filter Bills by Keyword" ng-model="billKeyword" />
     </div>
     <div class="bills" ng-repeat="bill in bills | filter:billKeyword ">
       <div>
