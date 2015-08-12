@@ -9,8 +9,16 @@ $green: #7bc043;
 $blue: #0392cf;
 $gray: #aaaaaa;
 
+
+/*
+Font
+*/
+
 $font-stack: Helvetica, sans-serif;
 
+/*
+Mixins
+*/
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
