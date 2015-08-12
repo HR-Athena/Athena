@@ -47,6 +47,7 @@
     <div class="bills col-sm-10 col-sm-offset-1" ng-repeat="bill in member.data.votes | filter:billKeyword | limitTo: 3">
 
       <div class="bill col-sm-12">
+          {{ bill.id }}
           <span class="col-sm-1 member-vote vote-left" ng-class="{positive: (bill.vote === 'Yea' || bill.vote === 'Yes'), negative: (bill.vote === 'Nay' || bill.vote === 'No')}">
             <p>{{ bill.vote }}</p>
           </span>
@@ -67,8 +68,9 @@
             </p>
           </span>
         </div>
+          {{ secondMember.data.votes[$index].id }}
           <span class="col-sm-1 vote-right member-vote" ng-class="{positive: (bill.vote === 'Yea' || bill.vote === 'Yes'), negative: (bill.vote === 'Nay' || bill.vote === 'No')}">
-            <p>{{ secondMember.vote }}</p>
+            <p>{{ secondMember.data.votes[$index].vote }}</p>
           </span>
       </div>
     </div> <!--End bills -->
