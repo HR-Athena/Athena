@@ -5,15 +5,16 @@
       <img src="https://www.govtrack.us/data/photos/{{ profile.id }}-200px.jpeg">
     </div>
     <div class="profile-data">
-      <span class="profile-name">{{ member.name }}</span>
-      <span class="profile-birthdate">{{ member.birthdate }}</span>
-      <span class="profile-party">{{ member.party }}</span>
-      <span class="profile-description">{{ member.description }}</span>
+      <img src="https://www.govtrack.us/data/photos/{{ member.id }}-100px.jpeg">
+      <div class="profile-name"><b>{{ member.firstname }} {{ member.lastname }}</b></div>
+      <div class="profile-birthdate">{{ member.age }} Years Old</div>
+      <div class="profile-party">{{ member.party }}</div>
+      <div class="profile-description">{{ member.description }}</div>
       <div class="profile-social-media">
-        <span>{{ member.twitter }}</span>
-        <span>{{ member.youtube}}</span>
-        <span>{{ member.email }}</span>
-        <span>{{ member.phone }}</span>
+
+        <span ng-if="member.twitterid">Twitter: {{ member.twitterid }}</span>
+        <span ng-if="member.youtubeid">Youtube: {{ member.youtubeid}}</span>
+        <span ng-if="member.phone">Phone: {{ member.phone }}</span>
       </div>
     </div>
   </div>
@@ -21,27 +22,28 @@
     <div>
       <input type="text" placeholder="Filter Bills by Keyword" ng-model="billKeyword" />
     </div>
-    <div class="bills" ng-repeat="bill in bills | filter:billKeyword ">
+    <div class="bills" ng-repeat="bill in member.votes | filter:billKeyword | limitTo: 10">
       <div>
         <span class="bill-vote">
           <p>
           {{ bill.vote }}
+          {{ bill.id}}
           </p>
         </span>
       <div>
         <span class="bill-question">
           <p>
-            <a href="{{ bill.thomas_link }}">{{ bill.question }}</a>
+            <a href="{{ bill.thomas_link }}">{{ bill.bill_question }}</a>
           </p>
         </span>
         <span class="bill-details">
           <p>
-            {{ bill.question_details }}
+            {{ bill.bill_question_details }}
           </p>
         </span>
         <span class="bill_status">
           <p>
-            {{ bill.current_status_label }}
+            {{ bill.result }}
           </p>
         </span>
       </div>
