@@ -1,9 +1,10 @@
 <!-- Home View-->
-<div class="col-sm-8 col-sm-offset-2"> 
+<div class="col-sm-8 col-sm-offset-2" > 
   <div class="col-sm-4 col-sm-offset-2">
-    <input type="text" placeholder="Search by Congress Member Name" ng-model="memberSearch" />
+    <input type="text" placeholder="Search by Congress Member Name" ng-model="memberSearch" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter: $viewValue | limitTo:5" />
+    <button ng-click="gotoMember()"> Search </button> 
     <div class="members" ng-hide"!model.length || selected">
-      <div class="member" ng-repeat="member in members | filter:memberSearch track by $index" ng-click="getMember(member.id)">
+      <div class="member"  ng-click="getMember(member.id)">
         <p class="member_name">{{ member.name }}</p>
       </div>
     </div>
@@ -24,3 +25,5 @@
     </div>
   </div>
 </div>
+<!-- 
+ng-repeat="member in allMembers | filter:memberSearch track by $index" -->

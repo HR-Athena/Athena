@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var pathParse = require('path-parse'); // polyfill for older Node versions
 var favicon = require('serve-favicon');
 var members = require('./memberController');
@@ -6,6 +7,10 @@ var bills = require('./billController');
 var utils = require('./utilController');
 
 var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + "/../public"));
 app.use(favicon(__dirname + '/../client/favicon.ico'));
@@ -36,18 +41,6 @@ var memberList = {};
 */
 var memberProfile = {};
 
-/* memberVotes will look like this after a GET request to a specific member's voting record
-  { 
-    bill_id1: {
-                vote: STRING_OF_VOTE,
-                bill_question: STRING_OF_QUESTION,
-                bill_question_details: STRING_OF_DETAILS,
-                result: STRING_OF_RESULT
-              },
-    bill_id2: {...}
-  }
-*/
-var memberVotes = {};
 
 /* billInfo will look like this after a GET request to a specific bill_ID 
   {
@@ -85,13 +78,28 @@ app.get('/members/*', function(req, res){
 // on a GET request to 'votes/*', we are counting on the * to be a valid number for a member_ID
 // we use path to parse out the base of the url which will be the member_ID as a string
 // sends back memberVotes JSON to client
+
+/* memberVotes will look like this after a GET request to a specific member's voting record
+  [ 
+     { id: ID
+      vote: STRING_OF_VOTE,
+      bill_question: STRING_OF_QUESTION,
+      bill_question_details: STRING_OF_DETAILS,
+      result: STRING_OF_RESULT
+    },
+    {  ...
+     },
+  ]
+*/
+
 app.get('/votes/*', function(req, res){
+
   var pathObj = pathParse(req.url);
   var member_id = Number(pathObj.base);
   members.getMemberVotes(member_id, function(objects){
+    var memberVotes = [];
     objects.forEach(function(listing){
-      var bill_id = listing.vote.id;
-      memberVotes[bill_id] = utils.makeVoteInfo(listing);
+      memberVotes.push(utils.makeVoteInfo(listing));
     });
     res.send(memberVotes);
   });
@@ -100,6 +108,7 @@ app.get('/votes/*', function(req, res){
 // on a GET request to 'bills/*', we are counting on the * to be a valid number for a bill_ID
 // we use path to parse out the base of the url which will be the bill_ID as a string
 app.get('/bills/*', function(req, res){
+
   var pathObj = pathParse(req.url);
   var bill_id = Number(pathObj.base);
   bills.getBillInformation(bill_id, function(listing){ // populates billInfo object with bill data
@@ -108,8 +117,13 @@ app.get('/bills/*', function(req, res){
   });
 });
 
+app.get('/*', function(req, res){
+  res.render('index.ejs');
+});
+
 // this expression runs on server start, retrieves a list of current members and writes it to memberList
 members.getAllMembers(function(objects){
+  
   objects.forEach(function(listing){
     var id = listing.person.id;
     memberList[id] = utils.makeMemberEntry(listing);
