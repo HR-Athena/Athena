@@ -14,10 +14,29 @@
         </div>
       </div>
     </div>
+    <!-- Second Member -->
+    <div ng-if="secondMember.data.id" class="member-data">
+      <div class="second-member-data col-sm-4">
+          <img src="https://www.govtrack.us/data/photos/{{ member.data.id }}-100px.jpeg">
+          <div class="second-profile-data">        
+            <div class="profile-name"><b>{{ secondMember.data.firstname }} {{ secondMember.data.lastname }}</b></div>
+            <div class="profile-birthdate">{{ secondMember.data.age }} Years Old</div>
+            <div class="profile-party">{{ secondMember.data.party }}</div>
+            <div class="profile-description">{{ secondMember.data.description }}</div>
+            <div class="profile-social-media">
+              <span ng-if="secondMember.twitterid">Twitter: {{ secondMember.data.twitterid }}</span>
+              <span ng-if="secondMember.youtubeid">Youtube: {{ secondMember.data.youtubeid}}</span>
+              <span ng-if="secondMember.phone">Phone: {{ secondMember.data.phone }}</span>
+            </div>
+          </div>
+      </div> <!-- End Second Member -->
+    
+    <!-- Add Second Member Search -->
     <div class="profile-addMember col-sm-3 col-sm-offset-5">
        <input class="form-control input-sm" type="text" placeholder="Search by Congress Member Name" ng-model="addMember" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter: $viewValue | limitTo:5" />
       <button class="btn btn-default btn-sm" ng-click="loadMember()"> Add Member </button> 
-    </div>
+    </div> <!-- End Second Member Search -->
+
   </div>
 
   <div class="bill-votes col-sm-8 col-sm-offset-2">
@@ -51,7 +70,6 @@
           </span>
       </div>
     </div> <!--End bills -->
-
     <div class="graph"> 
       
     </div> <!-- End Graph -->

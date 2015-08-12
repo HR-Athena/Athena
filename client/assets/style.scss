@@ -60,7 +60,6 @@ Home Template Style
 /*
 Profile Template Style
 */
-
 .member-data, .second-member-data {
   display: inline-block;
 
@@ -87,6 +86,7 @@ Profile Template Style
 .profile-data {
   margin: 15px auto;
   float: right;
+  text-align: right;
 
   .profile-name {
     font-size: 150%;
@@ -123,6 +123,7 @@ Bills Styling
 }
 
 .member-vote {
+  position: relative;
   display: inline-block;
   font-size: 120%;
   margin-top: 15px;
@@ -132,6 +133,7 @@ Bills Styling
   outline: 1px solid red;
 
   span {
+    display: inline-block;
     vertical-align: middle;
   }
 }
