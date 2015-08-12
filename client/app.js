@@ -1,7 +1,9 @@
 var angular = require('angular');
 require('angular-ui-router');
+require('angular-ui-bootstrap');
 var home = require('./app/home');
 var profile = require('./app/profile');
+
 
 // test
 
@@ -10,6 +12,7 @@ var congressmanprofile = angular.module('congressmanprofile', [
   // add in controller dep
   //ex congressmanprofile.home
   'ui.router',
+  'ui.bootstrap',
   home.name,
   profile.name
   ])
@@ -23,10 +26,12 @@ var congressmanprofile = angular.module('congressmanprofile', [
       controller: 'homeController'
     })
     .state('profile', {
-      url: '/profile',
+      url: '/profile/:id',
       // template: "this is profile view",
       templateUrl: 'views/profile/profile.html',
       controller: 'profileController'
     });
 
 });
+
+

@@ -35,7 +35,9 @@ module.exports = {
   makeMemberProfile: function(listing) {
     return {
       id: listing.id,
-      name: listing.name,
+      firstname: listing.firstname,
+      lastname: listing.lastname,
+      fullname: listing.name,
       description: listing.roles[0].description,
       party: listing.roles[0].party,
       birthday: listing.birthday,
@@ -49,6 +51,7 @@ module.exports = {
 
   makeVoteInfo: function(listing) {
     return {
+      id: listing.vote.id,
       vote: listing.option.value,
       bill_question: listing.vote.question,
       bill_question_details: listing.vote.question_details,
