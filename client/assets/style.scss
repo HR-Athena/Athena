@@ -7,8 +7,11 @@ $orange: #f37736;
 $tan: #fdf498;
 $green: #7bc043;
 $blue: #0392cf;
-$gray: #aaaaaa;
+$gray: #bbbbbb;
 
+$red-rgb: (238,64,53);
+$green-rgb: (123,192,67);
+$gray-rgb: (187,187,187);
 
 /*
 Font
@@ -31,11 +34,21 @@ body {
 }
 
 .header {
-  margin: 30px auto;
+  margin: 20px auto 10px;
+  
+  a {
+    font-style: none;
+    color: $gray;
+  }
 }
 
 .main {
   padding-top: 15px;
+}
+
+a {
+  font-style: none;
+  color: $blue;
 }
 
 /*
@@ -68,36 +81,54 @@ Profile Template Style
   }
 }
 
-.second-profile-data {
-  margin: 15px auto;
-  float: left;
-
-  .profile-name {
-    font-size: 150%;
-    margin: 5px;
+.member-data {
+  img {
+    margin-left: 5px;
   }
 
-  .profile-birthdate, .profile-party, .profile-description {
-    font-size: 125%;
-    margin: 5px;
+  .profile-data {
+    margin: 15px 0 0 0;
+    position: relative;
+    float: right;
+    width: 200px;
+
+    .profile-name {
+      font-size: 150%;
+      margin: 5px;
+    }
+
+    .profile-birthdate, .profile-party, .profile-description {
+      font-size: 125%;
+      margin: 5px;
+
+    }
+  }
+}
+
+.second-member-data {
+  img {
+    margin-left: 15px;
+    float: right;
+  }
+  
+  .second-profile-data {
+    margin: 15px 0 0 0;
+    position: relative;
+    width: 200px;
+    text-align: right;
+
+    .profile-name {
+      font-size: 150%;
+      margin: 5px;
+    }
+
+    .profile-birthdate, .profile-party, .profile-description {
+      font-size: 125%;
+      margin: 5px;
+    }
   }
 }
 
-.profile-data {
-  margin: 15px auto;
-  float: right;
-  text-align: right;
-
-  .profile-name {
-    font-size: 150%;
-    margin: 5px;
-  }
-
-  .profile-birthdate, .profile-party, .profile-description {
-    font-size: 125%;
-    margin: 5px;
-  }
-}
 
 /*
 Bills Styling
@@ -130,22 +161,32 @@ Bills Styling
   margin-left: 20px;
   width: 50px;
   height: 30px;
-  outline: 1px solid red;
 
-  span {
-    display: inline-block;
-    vertical-align: middle;
+  p {
+    margin-top: 8px;
   }
 }
 
 .vote-left {
   float: left;
+  font-weight: 600;
+  background: rgba(187,187,187, 0.5);
 }
 
 .vote-right {
   float: right;
   margin-top: 15px;
   margin-right: 20px;
+  font-weight: 600;
+  background: rgba(187,187,187, 0.5);
+}
+
+.positive {
+  background: rgba(1,176,1, 0.5);
+}
+
+.negative {
+  background: rgba(176,1,1, 0.5);
 }
 
 .bill {
@@ -158,6 +199,7 @@ Bills Styling
 
   .bill-question {
     font-size: 110%;
+    font-weight: 600;
   }
 
   .bill-details {
