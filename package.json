@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "gulp test-client",
-    "postinstall": "bower install && gulp build-heroku"
+    "postinstall": "bower install && gulp clean && gulp build-heroku"
   },
   "repository": {
     "type": "git",
@@ -55,7 +55,6 @@
     "vinyl-buffer": "~1.0.0",
     "vinyl-source-stream": "~1.1.0",
     "vinyl-transform": "~1.0.0"
-
   },
   "devDependencies": {
     "chai": "~3.2.0",

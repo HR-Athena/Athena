@@ -19,6 +19,7 @@ https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
+    del = require('del'),
     gulpBrowserify = require('gulp-browserify'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
@@ -49,6 +50,14 @@ gulp.task('lint', function() {
   gulp.src('./client/**/*.js')
   .pipe(jshint())
   .pipe(jshint.reporter('default'));
+});
+
+
+// Clean task — cleans the contents of the public folder
+gulp.task('clean', function (callback) {
+  del([
+    'public/**/*'
+  ], callback);
 });
 
 
