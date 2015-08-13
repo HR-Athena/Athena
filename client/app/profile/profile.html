@@ -49,7 +49,7 @@
     </div>
     <div class="bills col-sm-10 col-sm-offset-1" ng-repeat="bill in member.data.votes | filter:billKeyword | limitTo: 3">
       <div class="bill col-sm-12">
-          <div class="col-sm-1 member-vote vote-left" ng-class="{positive: (bill.vote === 'Yea' || bill.vote === 'Yes'), negative: (bill.vote === 'Nay' || bill.vote === 'No')}">
+          <div class="col-sm-1 member-vote vote-left" ng-class="{positive: (bill.vote === 'Yea' || bill.vote === 'Yes' || bill.vote === 'Aye'), negative: (bill.vote === 'Nay' || bill.vote === 'No')}">
             <p>{{ bill.vote }}</p>
           </div>
         <div class="bill_text col-sm-8 col-sm-offset-1">
@@ -58,7 +58,7 @@
               <a href="{{ bill.thomas_link }}">{{ bill.bill_question }}</a>
             </p>
           </span>
-          <span class="bill-details">
+          <span class="bill-details" ng-if="bill.bill_question_details">
             <p>
               Details: {{ bill.bill_question_details }}
             </p>
@@ -69,14 +69,20 @@
             </p>
           </span>
         </div>
-          <div class="col-sm-1 vote-right member-vote" ng-if="secondMember.data.votes[$index].vote" ng-class="{positive: (secondMember.data.votes[$index].vote === 'Yea' || secondMember.data.votes[$index].vote === 'Yes'), negative: (secondMember.data.votes[$index].vote === 'Nay' || secondMember.data.votes[$index].vote === 'No')}">
+          <div class="col-sm-1 vote-right member-vote" ng-if="secondMember.data.votes[$index].vote" ng-class="{positive: (secondMember.data.votes[$index].vote === 'Yea' || secondMember.data.votes[$index].vote === 'Yes' || secondMember.data.votes[$index].vote === 'Aye'), negative: (secondMember.data.votes[$index].vote === 'Nay' || secondMember.data.votes[$index].vote === 'No')}">
             <p>{{ secondMember.data.votes[$index].vote }}</p>
           </div>
       </div>
     </div> <!--End bills -->
-    <div class="graph"> 
-      
-    </div> <!-- End Graph -->
   </div>
-  
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="legend">
+      <h2>Historic Member Votes</h2>
+      <span class="favor">In Favor of Bill</span>
+      <span class="opposed">Opposed to Bill</span>
+      <span class="other">Abstaining, Not Present, or other Vote</span>
+    </div>
+    <div class="graph">
+    </div>
+  </div> <!-- End Graph -->
 </div>
