@@ -17,8 +17,8 @@
 
     <!-- Add Second Member Search -->
     <div class="profile-addMember col-sm-3 col-sm-offset-5">
-       <input class="form-control input-sm" type="text" placeholder="Search by Congress Member Name" ng-model="addMember" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter: $viewValue | limitTo:5" />
-      <button class="btn btn-default btn-sm" ng-click="loadMember()"> Add Member </button> 
+       <input class="form-control input-sm" type="text" placeholder="Search by Congress Member Name" ng-model="addMember" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter:{id: '!' + member.data.id} | filter:{role: member.data.role} | filter: $viewValue | limitTo:5" />
+      <button class="btn btn-default btn-sm" ng-click="loadMember()"> Add another {{member.data.role}} </button> 
     </div> <!-- End Second Member Search -->
 
     <!-- Second Member -->
