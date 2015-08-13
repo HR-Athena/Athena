@@ -1,5 +1,7 @@
 // Profile Controller
 
+var d3 = require('d3');
+
 module.exports = function profileController($scope, $stateParams, Home){
 
   console.log('I am profile controller');
@@ -24,10 +26,10 @@ module.exports = function profileController($scope, $stateParams, Home){
 
    function getMember(id, member){
     Home.getMember(id)
-    .then(function(data){      
+    .then(function(data){
       member.data = data;
       member.data.age=calculateAge(new Date(member.data.birthday));
-      // loadGraph(id);
+      loadGraph(id);
       return member;
     }).then(function(member){
       getMemberVotes(member);
