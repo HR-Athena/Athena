@@ -128,7 +128,8 @@ module.exports = function profileController($scope, $stateParams, Home){
    ******************************************/
    function loadGraph(memberId){
       var url = 'https://www.govtrack.us/api/v2/vote_voter/?person=' + memberId + '&limit=1000&order_by=created&format=json&fields=created,option__value,vote__category,vote__chamber,vote__question,vote__number,vote__percent_plus,vote__related_bill';
-     //Load Data
+     
+      //Load Data
       d3.json(url, function (error, data) {
        
         data = data.objects;
@@ -181,6 +182,7 @@ module.exports = function profileController($scope, $stateParams, Home){
          .attr('height', height)
          .attr('viewBox',  "0 0 " + width + " " + height);
 
+        // Add x-axis and Label
         vis.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
@@ -193,6 +195,7 @@ module.exports = function profileController($scope, $stateParams, Home){
             .style('text-anchor', 'bottom')
             .text('Date of Vote');
 
+        // Add y-axis and Label
         vis.append("g")
             .attr("class", "y axis")
             .call(yAxis)
@@ -203,6 +206,12 @@ module.exports = function profileController($scope, $stateParams, Home){
              .attr('y', -30)
              .style('text-anchor', 'bottom')
              .text('% In Favor');
+
+        // // Add politician name
+        // vis.append("text")
+        //   .attr('class', 'axis')
+        //   .text(data.person.name);
+
             
         //Setup Fill Color based on Vote value
         var color = function(value) {

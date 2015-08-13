@@ -35,9 +35,9 @@ var Server = require('karma').Server; // this is for testing using Karma
 
 var paths = {
     scripts: ['client/**/*.js'], // previously had: '!client/lib/**/*.js'
-    styles: ['./client/assets/**/*.css', './client/assets/**/*.scss', './client/lib/**/*.css'],
+    styles: ['./client/assets/**/*.css', './client/assets/**/*.scss', './client/lib/**/*.css',],
     index: './client/index.html',
-    partials: ['client/app/**/*.html', '!client/index.html']
+    partials: ['client/app/**/*.html', '!client/index.html'],
     // distDev: './dist.dev',
     // distProd: './dist.prod',
     // distScriptsProd: './dist.prod/scripts',
