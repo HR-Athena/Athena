@@ -207,7 +207,7 @@ Bills Styling
 }
 
 .negative {
-  background: rgba(176,1,1, 0.5);
+  background: rgba(238,64,53, 0.7);
 }
 
 .bill {
@@ -235,6 +235,26 @@ Bills Styling
 /*
 D3 Styling
 */
+.legend {
+  margin: 20px 0 0 5px;
+  text-align: center;
+  font-size: 105%;
+  font-weight: 500;
+
+  span {
+    padding: 3px 5px 3px 5px;
+  }
+  .favor {
+    background: rgba(1,176,1, 0.5);
+  }
+  .opposed {
+    background: rgba(238,64,53, 0.7);
+  }
+  .other {
+    background: rgba(187,187,187, 0.7);
+  }
+}
+
 svg {
   margin: 10px 30px;
 }
@@ -248,4 +268,10 @@ rect {
   width: 200px;
   height: 150px;
   pointer-events: none;
+}
+
+.axis {
+  margin: 5px 0 10px 0;
+  font-size: 150%;
+  font-weight: 500;
 }
