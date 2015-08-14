@@ -1,7 +1,6 @@
 
 module.exports = function homeFactory($http){
 
-  console.log('I am factory!');
   var allMembers = [];
   var trendingMembers;
   // getAllMembers();
@@ -19,7 +18,7 @@ module.exports = function homeFactory($http){
       for (var id in res.data.memberList){
         allMembers.push(res.data.memberList[id]);
       }
-      // scope.allMembers = allMembers;
+      scope.allMembers = allMembers;
       trendingMembers = res.data.trendingList;
       scope.trendingMembers = res.data.trendingList;
     });
