@@ -128,7 +128,7 @@ module.exports = function profileController($scope, $stateParams, Home){
    * Plot Historical Votes on Graph
    ******************************************/
    function loadGraph(memberId, memberName){
-      var url = 'https://www.govtrack.us/api/v2/vote_voter/?person=' + memberId + '&limit=1000&order_by=created&format=json&fields=created,option__value,vote__category,vote__chamber,vote__question,vote__number,vote__percent_plus,vote__related_bill';
+      var url = 'https://www.govtrack.us/api/v2/vote_voter/?person=' + memberId + '&limit=1000&order_by=+created&format=json&fields=created,option__value,vote__category,vote__chamber,vote__question,vote__number,vote__percent_plus,vote__link,vote__related_bill';
      
       //Load Data
       d3.json(url, function (error, data) {
@@ -242,6 +242,7 @@ module.exports = function profileController($scope, $stateParams, Home){
          .attr('cx', xMap)
          .attr('cy', yMap)
          .style('fill', function (d) { return color(d.option.value); })
+         .on('click', function (d, i) { window.open( d.vote.link, '_blank'); })
          .on('mouseover', function (d) {
            tooltip.transition()
              .duration(500)
