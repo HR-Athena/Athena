@@ -2,24 +2,24 @@
 module.exports = function homeFactory($http){
 
   console.log('I am factory!');
-  var allMembers = [];
-  getAllMembers();
-
-
+  // getAllMembers();
 
   /*******************************************
    * Loads All Members Name and ID from server
    ******************************************/
   
-  function getAllMembers(){
+  function getAllMembers(scope){
     return $http({
       method: 'GET',
       url: '/members/all',
     })
     .then(function(res){
-      for (var id in res.data){
-        allMembers.push(res.data[id]);
+      var allMembers = [];
+      for (var id in res.data.memberList){
+        allMembers.push(res.data.memberList[id]);
       }
+      scope.allMembers = allMembers;
+      scope.trendingMembers = res.data.trendingList;
     });
   }
 
@@ -70,7 +70,6 @@ module.exports = function homeFactory($http){
    ******************************************/
 
   return({
-    allMembers: allMembers, 
     getAllMembers: getAllMembers,
     getMember: getMember,
     getMemberVotes: getMemberVotes,
