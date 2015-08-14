@@ -18,6 +18,7 @@ module.exports = function homeFactory($http){
       for (var id in res.data.memberList){
         allMembers.push(res.data.memberList[id]);
       }
+
       for (var i = 0; i < res.data.trendingList.length; i++){
         trendingMembers.push(res.data.trendingList[i]);
       }
