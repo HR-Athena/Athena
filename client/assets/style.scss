@@ -91,11 +91,12 @@ Home Template Style
 .home-profile {
   margin-top: 15px;
   text-align: center;
-  font-size: 110%;
+  font-size: 115%;
+  letter-spacing: .75px;
   font-weight: 500;
 
   div {
-    margin-top: 2px;
+    margin-top: 5px;
     text-align: center;
   }
 }
@@ -154,7 +155,8 @@ Profile Template Style
   button {
     position: relative;
     float: right;
-    margin: -3px -8px 0 0;
+    margin: 5px auto 0 auto;
+
   }
   
   .second-profile-data {
@@ -205,9 +207,11 @@ Bills Styling
   text-align: center;
   vertical-align: middle;
   font-size: 120%;
-  transform: translateY(75%);
+  font-weight: 600;
+  margin-top: 15px;
   margin-left: 20px;
   padding: 5px;
+  background: rgba(187,187,187, 0.5);
 
   p {
     margin: 0;
@@ -218,16 +222,11 @@ Bills Styling
 .vote-left {
   float: left;
   vertical-align: middle;
-  font-weight: 600;
-  background: rgba(187,187,187, 0.5);
 }
 
 .vote-right {
   float: right;
-  margin-top: 15px;
   margin-right: 20px;
-  font-weight: 600;
-  background: rgba(187,187,187, 0.5);
 }
 
 .positive {
@@ -285,6 +284,12 @@ D3 Styling
 
 svg {
   margin: 10px 30px;
+}
+
+.x.axis path, .x.axis line, .y.axis path, .y.axis line {
+  /*opacity: 0.75;*/
+  fill: none;
+  stroke: $gray;
 }
 
 rect {
