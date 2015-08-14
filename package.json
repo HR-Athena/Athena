@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "gulp test-client",
+    "test": "gulp test-backend && gulp test-client",
     "postinstall": "bower install && gulp clean && gulp build-heroku"
   },
   "repository": {
@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "chai": "~3.2.0",
-    "mocha": "~2.2.5"
+    "mocha": "~2.2.5",
+    "gulp-mocha": "~2.1.3"
   }
 }

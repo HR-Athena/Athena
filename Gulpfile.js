@@ -31,6 +31,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'); // not necessary, but adds prefixes for all browsers
 var Server = require('karma').Server; // this is for testing using Karma
+var mocha = require('gulp-mocha'); // this is for backend testing
 
 
 var paths = {
@@ -38,7 +39,8 @@ var paths = {
   styles: ['./client/assets/**/*.css', './client/assets/**/*.scss', './client/lib/**/*.css'],
   index: './client/index.html',
   partials: ['client/app/**/*.html', '!client/index.html'],
-  images: ['client/assets/**/*.png', 'client/assets/**/*.jpg', 'client/assets/**/*.jpeg', 'client/assets/**/*.gif', 'client/assets/**/*.svg', 'client/**/*.ico']
+  images: ['client/assets/**/*.png', 'client/assets/**/*.jpg', 'client/assets/**/*.jpeg', 'client/assets/**/*.gif', 'client/assets/**/*.svg', 'client/**/*.ico'],
+  backendTests: ['specs/server/**/*.js']
   // distDev: './dist.dev',
   // distProd: './dist.prod',
   // distScriptsProd: './dist.prod/scripts',
@@ -129,9 +131,16 @@ gulp.task('styles', function() {
   .pipe(gulp.dest('public/styles/'));
 });
 
+// Runs mocha tests for backend for the client side once and exits
+gulp.task('test-backend', function () {
+  return gulp.src(paths.backendTests, {read: false})
+  // gulp-mocha needs filepaths so you can't have any plugins before it 
+    .pipe(mocha({reporter: 'nyan'}));
+});
+
 // Runs tests for the client side once and exits
 // see this repo for inspiration: https://github.com/karma-runner/gulp-karma
-gulp.task('test-client', function (done) {
+gulp.task('test-client',['test-backend'], function (done) {
   new Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
@@ -155,7 +164,10 @@ gulp.task('watch', ['lint'], function() {
   ]);
 });
 
+// gulp.task('test', ['test-backend', 'test-client']);
 gulp.task('build', ['lint', 'browserify-prod', 'views', 'styles', 'images']);
 gulp.task('build-heroku', ['browserify-prod', 'views', 'styles', 'images']);
+
+gulp.task('test', ['test-client']);
 
 gulp.task('default', ['lint', 'browserify-dev', 'views', 'styles', 'images', 'watch']);
