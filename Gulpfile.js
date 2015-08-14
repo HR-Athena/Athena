@@ -140,7 +140,7 @@ gulp.task('test-backend', function () {
 
 // Runs tests for the client side once and exits
 // see this repo for inspiration: https://github.com/karma-runner/gulp-karma
-gulp.task('test-client', function (done) {
+gulp.task('test-client',['test-backend'], function (done) {
   new Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
@@ -167,5 +167,7 @@ gulp.task('watch', ['lint'], function() {
 // gulp.task('test', ['test-backend', 'test-client']);
 gulp.task('build', ['lint', 'browserify-prod', 'views', 'styles', 'images']);
 gulp.task('build-heroku', ['browserify-prod', 'views', 'styles', 'images']);
+
+gulp.task('test', ['test-client']);
 
 gulp.task('default', ['lint', 'browserify-dev', 'views', 'styles', 'images', 'watch']);
