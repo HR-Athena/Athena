@@ -1,7 +1,7 @@
 <!-- Profile View Template -->
 <div class="profiles col-sm-8 col-sm-offset-2">
   <div class="member-data col-sm-4">
-      <img class="member-profile-picture" src="https://www.govtrack.us/data/photos/{{ member.data.id }}-100px.jpeg">
+      <img class="member-profile-picture" src="https://www.govtrack.us/data/photos/{{ member.data.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'">
       <div class="profile-data">        
         <div class="profile-name"><b>{{ member.data.firstname }} {{ member.data.lastname }}</b></div>
         <div class="profile-birthdate">{{ member.data.age }} Years Old</div>
@@ -58,9 +58,16 @@
               <a href="{{ bill.link }}" target="_blank">{{ bill.bill_question }}</a>
             </p>
           </span>
+          <!-- Show Bill Details if available -->
           <span class="bill-details" ng-if="bill.bill_question_details">
             <p>
               Details: {{ bill.bill_question_details }}
+            </p>
+          </span>
+          <!-- Show Default Details if none available -->
+          <span class="bill-details" ng-if="!bill.bill_question_details">
+            <p>
+              Details: No Details Available
             </p>
           </span>
           <span class="bill_status">
