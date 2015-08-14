@@ -1,7 +1,6 @@
 
 module.exports = function homeFactory($http){
 
-  console.log('I am factory!');
   var allMembers = [];
   var trendingMembers = [];
   getAllMembers();

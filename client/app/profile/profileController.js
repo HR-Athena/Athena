@@ -4,8 +4,6 @@ var d3 = require('d3');
 
 module.exports = function profileController($scope, $stateParams, Home){
 
-  console.log('I am profile controller');
-
   var memberId1=$stateParams.id;
 
   $scope.allMembers = Home.allMembers;
@@ -29,8 +27,8 @@ module.exports = function profileController($scope, $stateParams, Home){
     .then(function(data){
       member.data = data;
       member.data.age=calculateAge(new Date(member.data.birthday));
-      memberName = member.data.firstname + " " + member.data.lastname;
-      loadGraph(id, memberName);
+      // memberName = member.data.firstname + " " + member.data.lastname;
+      loadGraph(id, member.data.fullname);
       return member;
     }).then(function(member){
       getMemberVotes(member);
@@ -68,8 +66,10 @@ module.exports = function profileController($scope, $stateParams, Home){
    ******************************************/
    $scope.loadMember = function (){
     var memberId2 = $scope.addMember.id;
-    $scope.test = 1;
-    getMember(memberId2, $scope.secondMember);    
+    // $scope.test = 1;
+    getMember(memberId2, $scope.secondMember);
+    // Clear Member from Input
+    $scope.addMember = null;
    };
 
 
@@ -128,7 +128,7 @@ module.exports = function profileController($scope, $stateParams, Home){
    * Plot Historical Votes on Graph
    ******************************************/
    function loadGraph(memberId, memberName){
-      var url = 'https://www.govtrack.us/api/v2/vote_voter/?person=' + memberId + '&limit=1000&order_by=created&format=json&fields=created,option__value,vote__category,vote__chamber,vote__question,vote__number,vote__percent_plus,vote__related_bill';
+      var url = 'https://www.govtrack.us/api/v2/vote_voter/?person=' + memberId + '&limit=1000&order_by=created&format=json&fields=created,option__value,vote__category,vote__chamber,vote__question,vote__number,vote__percent_plus,vote__link,vote__related_bill';
      
       //Load Data
       d3.json(url, function (error, data) {
@@ -137,6 +137,9 @@ module.exports = function profileController($scope, $stateParams, Home){
 
         //Parse date / time
         var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
+
+        //Pretty Dat Format
+        var prettyDate = d3.time.format("%B %d, %Y");
        
         //Parse Date and coerce numbers
         data.forEach(function(d){
@@ -152,7 +155,7 @@ module.exports = function profileController($scope, $stateParams, Home){
         var xScale = d3.time.scale().range([0, width]).domain(d3.extent(data, function (d) { return d.created; }));
         var xValue = function(d) { return d.created; };
         var xMap = function(d) { return xScale(xValue(d)); };
-        var xAxis = d3.svg.axis().scale(xScale).orient('bottom');
+        var xAxis = d3.svg.axis().scale(xScale).orient('bottom').tickFormat(d3.time.format('%b \'%y'));
 
         var yScale = d3.scale.linear().range([height, 0]).domain([0, 100]);
         var yValue = function(d) { return d.vote.percent_plus * 100; };
@@ -210,7 +213,7 @@ module.exports = function profileController($scope, $stateParams, Home){
         // Add politician name
         vis.append("text")
           .attr('class', 'axis')
-          .attr('x', (width - padding.left - 30) / 2)
+          .attr('x', (width - padding.left - 50) / 2)
           .attr('dy', "-.75em")
           .text(memberName);
             
@@ -242,11 +245,12 @@ module.exports = function profileController($scope, $stateParams, Home){
          .attr('cx', xMap)
          .attr('cy', yMap)
          .style('fill', function (d) { return color(d.option.value); })
+         .on('click', function (d, i) { window.open( d.vote.link, '_blank'); })
          .on('mouseover', function (d) {
            tooltip.transition()
              .duration(500)
              .style('opacity', '.95');
-           tooltip.html('<dl><dt>Topic: </dt><dd>' + d.vote.question + '</dd><dt>Vote/Category: </dt><dd>' + d.option.value +" / "+ d.vote.category + '</dd><dt>Date: </dt><dd>' + d.created + '</dd></dl>')
+           tooltip.html('<dl><dt>Topic: </dt><dd>' + d.vote.question + '</dd><dt>Vote/Category: </dt><dd>' + d.option.value +" / "+ d.vote.category + '</dd><dt>Date: </dt><dd>' + prettyDate(d.created) + '</dd></dl>')
              .style('left', (d3.event.pageX + 15) + 'px')
              .style('top', (d3.event.pageY + 15) + 'px')
              .style('padding', "5px")

@@ -1,7 +1,7 @@
 <!-- Profile View Template -->
 <div class="profiles col-sm-8 col-sm-offset-2">
   <div class="member-data col-sm-4">
-      <img class="member-profile-picture" src="https://www.govtrack.us/data/photos/{{ member.data.id }}-100px.jpeg">
+      <img class="member-profile-picture" src="https://www.govtrack.us/data/photos/{{ member.data.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'">
       <div class="profile-data">        
         <div class="profile-name"><b>{{ member.data.firstname }} {{ member.data.lastname }}</b></div>
         <div class="profile-birthdate">{{ member.data.age }} Years Old</div>
@@ -11,33 +11,33 @@
           <span ng-if="member.data.twitterid"><a href="http://www.twitter.com/{{ member.data.twitterid }}"><img src="images/icons/twitter.png"></a></span>
           <span ng-if="member.data.youtubeid"><a href="http://www.youtube.com/{{ member.data.youtubeid }}"><img src="images/icons/youtube.png"></a></span>
           <span ng-if="member.data.website"><a href="{{ member.data.website }}"><img src="images/icons/site.png"></a></span>
-          <!-- <span ng-if="member.data.phone"><img src="styles/icons/phone.png" alt="{{ member.data.phone }}"></span> -->
+          <!-- <span ng-if="member.data.phone"><img src="images/icons/phone.png" alt="{{ member.data.phone }}"></span> -->
         </div>
       </div>
     </div>
 
     <!-- Add Second Member Search -->
-    <div class="profile-addMember col-sm-3 col-sm-offset-5">
-       <input class="form-control input-sm" type="text" placeholder="Search by Congress Member Name" ng-model="addMember" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter:{id: '!' + member.data.id} | filter:{role: member.data.role} | filter: $viewValue | limitTo:5" />
-      <button class="btn btn-default btn-sm" ng-click="loadMember()"> Add another {{member.data.role}} </button> 
+    <div ng-hide="secondMember.data.id" class="profile-addMember col-sm-3 col-sm-offset-5">
+       <input class="form-control input-sm" type="text" placeholder="Search by Politician Name" ng-model="addMember" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter:{id: '!' + member.data.id} | filter:{role: member.data.role} | filter: $viewValue | limitTo:5" />
+      <button class="btn btn-default btn-sm text-capitalize" ng-click="loadMember()"> Compare {{member.data.role}} </button> 
     </div> <!-- End Second Member Search -->
 
     <!-- Second Member -->
-    <div ng-if="secondMember.data.id" class="second-member-data  col-sm-4">
-      <img class="second-member-profile-pic" src="https://www.govtrack.us/data/photos/{{ secondMember.data.id }}-100px.jpeg">
+    <div ng-if="secondMember.data.id" class="second-member-data col-sm-4 col-sm-offset-4">
+      <img class="second-member-profile-pic" src="https://www.govtrack.us/data/photos/{{ secondMember.data.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'">
       <div class="second-profile-data">        
         <div class="profile-name"><b>{{ secondMember.data.firstname }} {{ secondMember.data.lastname }}</b></div>
         <div class="profile-birthdate">{{ secondMember.data.age }} Years Old</div>
         <div class="profile-party">{{ secondMember.data.party }}</div>
         <div class="profile-description">{{ secondMember.data.description }}</div>
         <div class="profile-social-media">
-          <span ng-if="secondMember.data.twitterid"><a href="http://www.twitter.com/{{ secondMember.data.twitterid }}"><img src="styles/icons/twitter.png"></a></span>
-          <span ng-if="secondMember.data.youtubeid"><a href="http://www.youtube.com/{{ secondMember.data.youtubeid }}"><img src="styles/icons/youtube.png"></a></span>
-          <span ng-if="secondMember.data.website"><a href="{{ secondMember.data.website }}"><img src="styles/icons/site.png"></a></span>
-          <!-- <span ng-if="secondMember.data.phone"><img src="styles/icons/phone.png" alt="{{ secondMember.data.phone }}"></span> -->
+          <span ng-if="secondMember.data.twitterid"><a href="http://www.twitter.com/{{ secondMember.data.twitterid }}"><img src="images/icons/twitter.png"></a></span>
+          <span ng-if="secondMember.data.youtubeid"><a href="http://www.youtube.com/{{ secondMember.data.youtubeid }}"><img src="images/icons/youtube.png"></a></span>
+          <span ng-if="secondMember.data.website"><a href="{{ secondMember.data.website }}"><img src="images/icons/site.png"></a></span>
+          <!-- <span ng-if="secondMember.data.phone"><img src="images/icons/phone.png" alt="{{ secondMember.data.phone }}"></span> -->
         </div>
       </div>
-      <button class="btn btn-default btn-xs">Change Politician</button>
+      <button class="btn btn-default btn-xs" ng-click="secondMember.data.id = undefined">Change Politician</button>
     </div> <!-- End Second Member -->
     
   </div>
@@ -52,15 +52,25 @@
           <div class="col-sm-1 member-vote vote-left" ng-class="{positive: (bill.vote === 'Yea' || bill.vote === 'Yes' || bill.vote === 'Aye'), negative: (bill.vote === 'Nay' || bill.vote === 'No')}">
             <p>{{ bill.vote }}</p>
           </div>
+          <div class="col-sm-1 vote-right member-vote" ng-if="secondMember.data.votes[$index].vote" ng-class="{positive: (secondMember.data.votes[$index].vote === 'Yea' || secondMember.data.votes[$index].vote === 'Yes' || secondMember.data.votes[$index].vote === 'Aye'), negative: (secondMember.data.votes[$index].vote === 'Nay' || secondMember.data.votes[$index].vote === 'No')}">
+            <p>{{ secondMember.data.votes[$index].vote }}</p>
+          </div>
         <div class="bill_text col-sm-8 col-sm-offset-1">
           <span class="bill-question">
             <p>
               <a href="{{ bill.link }}" target="_blank">{{ bill.bill_question }}</a>
             </p>
           </span>
+          <!-- Show Bill Details if available -->
           <span class="bill-details" ng-if="bill.bill_question_details">
             <p>
               Details: {{ bill.bill_question_details }}
+            </p>
+          </span>
+          <!-- Show Default Details if none available -->
+          <span class="bill-details" ng-if="!bill.bill_question_details">
+            <p>
+              Details: No Details Available
             </p>
           </span>
           <span class="bill_status">
@@ -69,9 +79,6 @@
             </p>
           </span>
         </div>
-          <div class="col-sm-1 vote-right member-vote" ng-if="secondMember.data.votes[$index].vote" ng-class="{positive: (secondMember.data.votes[$index].vote === 'Yea' || secondMember.data.votes[$index].vote === 'Yes' || secondMember.data.votes[$index].vote === 'Aye'), negative: (secondMember.data.votes[$index].vote === 'Nay' || secondMember.data.votes[$index].vote === 'No')}">
-            <p>{{ secondMember.data.votes[$index].vote }}</p>
-          </div>
       </div>
     </div> <!--End bills -->
   </div>
@@ -83,6 +90,6 @@
       <span class="other">Abstaining, Not Present, or other Vote</span>
     </div>
     <div class="graph">
-    </div>
+    </div> 
   </div> <!-- End Graph -->
 </div>
