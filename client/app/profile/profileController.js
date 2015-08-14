@@ -29,7 +29,8 @@ module.exports = function profileController($scope, $stateParams, Home){
     .then(function(data){
       member.data = data;
       member.data.age=calculateAge(new Date(member.data.birthday));
-      loadGraph(id);
+      memberName = member.data.firstname + " " + member.data.lastname;
+      loadGraph(id, memberName);
       return member;
     }).then(function(member){
       getMemberVotes(member);
@@ -126,9 +127,10 @@ module.exports = function profileController($scope, $stateParams, Home){
   /*******************************************
    * Plot Historical Votes on Graph
    ******************************************/
-   function loadGraph(memberId){
+   function loadGraph(memberId, memberName){
       var url = 'https://www.govtrack.us/api/v2/vote_voter/?person=' + memberId + '&limit=1000&order_by=created&format=json&fields=created,option__value,vote__category,vote__chamber,vote__question,vote__number,vote__percent_plus,vote__related_bill';
-     //Load Data
+     
+      //Load Data
       d3.json(url, function (error, data) {
        
         data = data.objects;
@@ -142,8 +144,8 @@ module.exports = function profileController($scope, $stateParams, Home){
           d.vote.percent_plus = +d.vote.percent_plus;
         });
 
-        var margin = {top: 20, right: 20, bottom: 50, left: 40},
-            padding = {top: 20, right: 30, bottom: 50, left: 40},
+        var margin = {top: 20, right: 20, bottom: 60, left: 40},
+            padding = {top: 40, right: 30, bottom: 50, left: 40},
             width = 960 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
 
@@ -181,28 +183,36 @@ module.exports = function profileController($scope, $stateParams, Home){
          .attr('height', height)
          .attr('viewBox',  "0 0 " + width + " " + height);
 
+        // Add x-axis and Label
         vis.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
           .append('text')
             .attr('class', 'label')
-            .attr('x', width / 2)
+            .attr('x', (width - padding.left) / 2)
             .attr('y', 32)
-            // .attr('dy', '.95em')
             .style('text-anchor', 'bottom')
             .text('Date of Vote');
 
+        // Add y-axis and Label
         vis.append("g")
             .attr("class", "y axis")
             .call(yAxis)
            .append('text')
              .attr('class', 'label')
              .attr('transform', 'rotate(-90)')
-             .attr('x', -(height / 2) )
+             .attr('x', -(height / 1.5) )
              .attr('y', -30)
              .style('text-anchor', 'bottom')
-             .text('% In Favor');
+             .text('% of Members In Favor of Bill');
+
+        // Add politician name
+        vis.append("text")
+          .attr('class', 'axis')
+          .attr('x', (width - padding.left - 30) / 2)
+          .attr('dy', "-.75em")
+          .text(memberName);
             
         //Setup Fill Color based on Vote value
         var color = function(value) {
@@ -219,7 +229,7 @@ module.exports = function profileController($scope, $stateParams, Home){
         };
 
         //Add Tooltip
-        var tooltip = d3.select('.graph').append('div')
+        var tooltip = d3.select('body').append('div')
          .attr('class', 'tooltip')
          .style('opacity', 0);
 
@@ -235,10 +245,10 @@ module.exports = function profileController($scope, $stateParams, Home){
          .on('mouseover', function (d) {
            tooltip.transition()
              .duration(500)
-             .style('opacity', '.9');
+             .style('opacity', '.95');
            tooltip.html('<dl><dt>Topic: </dt><dd>' + d.vote.question + '</dd><dt>Vote/Category: </dt><dd>' + d.option.value +" / "+ d.vote.category + '</dd><dt>Date: </dt><dd>' + d.created + '</dd></dl>')
-             .style('left', (d3.event.pageX + 10) + 'px')
-             .style('top', (d3.event.pageY - 20) + 'px')
+             .style('left', (d3.event.pageX + 15) + 'px')
+             .style('top', (d3.event.pageY + 15) + 'px')
              .style('padding', "5px")
              .style('border-radius', '10px')
              .style('background', '#FEFEFE' );
@@ -249,13 +259,14 @@ module.exports = function profileController($scope, $stateParams, Home){
              .style('opacity', 0);
          });
 
-        var zoomed = function () {
+        // Controls Zoom and circle resizing
+        function zoomed() {
           vis.select(".x.axis").call(xAxis);
           vis.select(".y.axis").call(yAxis);
           svg.selectAll('circle')
            .attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
            .attr('r', 3.5 / d3.event.scale );
-        };
+        }
      });
    }
 };

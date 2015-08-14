@@ -73,21 +73,32 @@ Home Template Style
 /*
 Profile Template Style
 */
+
+.profiles {
+  padding-top: 20px;
+}
+
+.profile-social-media {
+  img {
+    margin: 1px 4px 0;
+  }
+}
+
 .member-data, .second-member-data {
   display: inline-block;
 
-  img {
+  .member-profile-picture, .second-member-profile-pic {
     @include border-radius(20px);
   }
 }
 
 .member-data {
-  img {
+  .member-profile-picture {
     margin-left: 5px;
   }
 
   .profile-data {
-    margin: 15px 0 0 0;
+    margin: 0;
     position: relative;
     float: right;
     width: 200px;
@@ -106,9 +117,17 @@ Profile Template Style
 }
 
 .second-member-data {
-  img {
+  display: inline-block;
+
+  .second-member-profile-pic {
     margin-left: 15px;
     float: right;
+  }
+
+  button {
+    position: relative;
+    float: right;
+    margin: -3px -8px 0 0;
   }
   
   .second-profile-data {
@@ -156,14 +175,16 @@ Bills Styling
 .member-vote {
   position: relative;
   display: inline-block;
+  text-align: center;
+  vertical-align: middle;
   font-size: 120%;
   margin-top: 15px;
   margin-left: 20px;
-  width: 50px;
-  height: 30px;
+  padding: 5px;
 
   p {
-    margin-top: 8px;
+    margin: 0;
+    padding: 2px;
   }
 }
 
@@ -186,7 +207,7 @@ Bills Styling
 }
 
 .negative {
-  background: rgba(176,1,1, 0.5);
+  background: rgba(238,64,53, 0.7);
 }
 
 .bill {
@@ -209,4 +230,48 @@ Bills Styling
   .bill_status {
     font-size: 110%;
   }
+}
+
+/*
+D3 Styling
+*/
+.legend {
+  margin: 20px 0 0 5px;
+  text-align: center;
+  font-size: 105%;
+  font-weight: 500;
+
+  span {
+    padding: 3px 5px 3px 5px;
+  }
+  .favor {
+    background: rgba(1,176,1, 0.5);
+  }
+  .opposed {
+    background: rgba(238,64,53, 0.7);
+  }
+  .other {
+    background: rgba(187,187,187, 0.7);
+  }
+}
+
+svg {
+  margin: 10px 30px;
+}
+
+rect {
+  fill: white;
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  pointer-events: none;
+}
+
+.axis {
+  margin: 5px 0 10px 0;
+  font-size: 150%;
+  font-weight: 500;
 }
