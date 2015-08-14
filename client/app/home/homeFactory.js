@@ -2,14 +2,14 @@
 module.exports = function homeFactory($http){
 
   var allMembers = [];
-  var trendingMembers;
-  // getAllMembers();
+  var trendingMembers = [];
+  getAllMembers();
 
   /*******************************************
    * Loads All Members Name and ID from server
    ******************************************/
   
-  function getAllMembers(scope){
+  function getAllMembers(){
     return $http({
       method: 'GET',
       url: '/members/all',
@@ -18,9 +18,9 @@ module.exports = function homeFactory($http){
       for (var id in res.data.memberList){
         allMembers.push(res.data.memberList[id]);
       }
-      scope.allMembers = allMembers;
-      trendingMembers = res.data.trendingList;
-      scope.trendingMembers = res.data.trendingList;
+      for (var i = 0; i < res.data.trendingList.length; i++){
+        trendingMembers.push(res.data.trendingList[i]);
+      }
     });
   }
 
