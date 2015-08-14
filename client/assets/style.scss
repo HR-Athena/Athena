@@ -7,8 +7,11 @@ $orange: #f37736;
 $tan: #fdf498;
 $green: #7bc043;
 $blue: #0392cf;
-$gray: #aaaaaa;
+$gray: #bbbbbb;
 
+$red-rgb: (238,64,53);
+$green-rgb: (123,192,67);
+$gray-rgb: (187,187,187);
 
 /*
 Font
@@ -31,11 +34,21 @@ body {
 }
 
 .header {
-  margin: 30px auto;
+  margin: 20px auto 10px;
+  
+  a {
+    font-style: none;
+    color: $gray;
+  }
 }
 
 .main {
   padding-top: 15px;
+}
+
+a {
+  font-style: none;
+  color: $blue;
 }
 
 /*
@@ -60,44 +73,81 @@ Home Template Style
 /*
 Profile Template Style
 */
+
+.profiles {
+  padding-top: 20px;
+}
+
+.profile-social-media {
+  img {
+    margin: 1px 4px 0;
+  }
+}
+
 .member-data, .second-member-data {
   display: inline-block;
 
-  img {
+  .member-profile-picture, .second-member-profile-pic {
     @include border-radius(20px);
   }
 }
 
-.second-profile-data {
-  margin: 15px auto;
-  float: left;
-
-  .profile-name {
-    font-size: 150%;
-    margin: 5px;
+.member-data {
+  .member-profile-picture {
+    margin-left: 5px;
   }
 
-  .profile-birthdate, .profile-party, .profile-description {
-    font-size: 125%;
-    margin: 5px;
+  .profile-data {
+    margin: 0;
+    position: relative;
+    float: right;
+    width: 200px;
+
+    .profile-name {
+      font-size: 150%;
+      margin: 5px;
+    }
+
+    .profile-birthdate, .profile-party, .profile-description {
+      font-size: 125%;
+      margin: 5px;
+
+    }
+  }
+}
+
+.second-member-data {
+  display: inline-block;
+
+  .second-member-profile-pic {
+    margin-left: 15px;
+    float: right;
+  }
+
+  button {
+    position: relative;
+    float: right;
+    margin: -3px -8px 0 0;
+  }
+  
+  .second-profile-data {
+    margin: 15px 0 0 0;
+    position: relative;
+    width: 200px;
+    text-align: right;
+
+    .profile-name {
+      font-size: 150%;
+      margin: 5px;
+    }
+
+    .profile-birthdate, .profile-party, .profile-description {
+      font-size: 125%;
+      margin: 5px;
+    }
   }
 }
 
-.profile-data {
-  margin: 15px auto;
-  float: right;
-  text-align: right;
-
-  .profile-name {
-    font-size: 150%;
-    margin: 5px;
-  }
-
-  .profile-birthdate, .profile-party, .profile-description {
-    font-size: 125%;
-    margin: 5px;
-  }
-}
 
 /*
 Bills Styling
@@ -125,27 +175,39 @@ Bills Styling
 .member-vote {
   position: relative;
   display: inline-block;
+  text-align: center;
+  vertical-align: middle;
   font-size: 120%;
   margin-top: 15px;
   margin-left: 20px;
-  width: 50px;
-  height: 30px;
-  outline: 1px solid red;
+  padding: 5px;
 
-  span {
-    display: inline-block;
-    vertical-align: middle;
+  p {
+    margin: 0;
+    padding: 2px;
   }
 }
 
 .vote-left {
   float: left;
+  font-weight: 600;
+  background: rgba(187,187,187, 0.5);
 }
 
 .vote-right {
   float: right;
   margin-top: 15px;
   margin-right: 20px;
+  font-weight: 600;
+  background: rgba(187,187,187, 0.5);
+}
+
+.positive {
+  background: rgba(1,176,1, 0.5);
+}
+
+.negative {
+  background: rgba(238,64,53, 0.7);
 }
 
 .bill {
@@ -158,6 +220,7 @@ Bills Styling
 
   .bill-question {
     font-size: 110%;
+    font-weight: 600;
   }
 
   .bill-details {
@@ -167,4 +230,48 @@ Bills Styling
   .bill_status {
     font-size: 110%;
   }
+}
+
+/*
+D3 Styling
+*/
+.legend {
+  margin: 20px 0 0 5px;
+  text-align: center;
+  font-size: 105%;
+  font-weight: 500;
+
+  span {
+    padding: 3px 5px 3px 5px;
+  }
+  .favor {
+    background: rgba(1,176,1, 0.5);
+  }
+  .opposed {
+    background: rgba(238,64,53, 0.7);
+  }
+  .other {
+    background: rgba(187,187,187, 0.7);
+  }
+}
+
+svg {
+  margin: 10px 30px;
+}
+
+rect {
+  fill: white;
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  pointer-events: none;
+}
+
+.axis {
+  margin: 5px 0 10px 0;
+  font-size: 150%;
+  font-weight: 500;
 }

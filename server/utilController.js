@@ -1,3 +1,4 @@
+var _ = require('underscore');
 
 module.exports = {
 
@@ -14,7 +15,8 @@ module.exports = {
       id: listing.person.id,
       firstName: listing.person.firstname,
       lastName: listing.person.lastname,
-      title: listing.person.name
+      title: listing.person.name,
+      role: listing.role_type
     };
   },
 
@@ -38,20 +40,22 @@ module.exports = {
       firstname: listing.firstname,
       lastname: listing.lastname,
       fullname: listing.name,
-      description: listing.roles[0].description,
-      party: listing.roles[0].party,
+      description: listing.roles[listing.roles.length - 1].description,
+      party: listing.roles[listing.roles.length - 1].party,
+      role: listing.roles[listing.roles.length - 1].role_type,
       birthday: listing.birthday,
-      enddate: listing.roles[0].enddate,
+      enddate: listing.roles[listing.roles.length - 1].enddate,
       twitterid: listing.twitterid,
       youtubeid: listing.youtubeid,
-      website: listing.roles[0].website,
-      phone: listing.roles[0].phone
+      website: listing.roles[listing.roles.length - 1].website,
+      phone: listing.roles[listing.roles.length - 1].phone
     };
   },
 
   makeVoteInfo: function(listing) {
     return {
       id: listing.vote.id,
+      link: listing.vote.link,
       vote: listing.option.value,
       bill_question: listing.vote.question,
       bill_question_details: listing.vote.question_details,
@@ -86,6 +90,29 @@ module.exports = {
       margin: listing.margin,
       vote_type: listing.vote_type
     };
+  },
+
+  /*
+    The function that will initially create a list with random congressmen,
+    and then, every time a congressman was searched, will add him/her to this list.
+    Takes the array of all members and the trendingList array; relies on its side effects
+   */
+  addMembersToTrendingList: function(memberId, allMembers, trendingList){
+    if(!memberId){ // creates the initial trending list
+      var tempMembersArray = _.shuffle(_.values(allMembers));
+      for (var i = 0; i < 3; i++){
+        trendingList.push(tempMembersArray.pop());
+      }
+    } else {
+      // if trendind list does not contain a congressman with memberId
+      if(!_.find(trendingList, function(member){return member.id === memberId;})){
+        // add this congressman to the beginning of tranding list
+        // and remove last congressman from the trending list
+        var member = allMembers[memberId];
+        trendingList.pop();
+        trendingList.unshift(member);
+      }
+    }
   }
 
 };
