@@ -1,3 +1,4 @@
+var _ = require('underscore');
 
 module.exports = {
 
@@ -54,6 +55,7 @@ module.exports = {
   makeVoteInfo: function(listing) {
     return {
       id: listing.vote.id,
+      link: listing.vote.link,
       vote: listing.option.value,
       bill_question: listing.vote.question,
       bill_question_details: listing.vote.question_details,
@@ -88,6 +90,29 @@ module.exports = {
       margin: listing.margin,
       vote_type: listing.vote_type
     };
+  },
+
+  /*
+    The function that will initially create a list with random congressmen,
+    and then, every time a congressman was searched, will add him/her to this list.
+    Takes the array of all members and the trendingList array; relies on its side effects
+   */
+  addMembersToTrendingList: function(memberId, allMembers, trendingList){
+    if(!memberId){ // creates the initial trending list
+      var tempMembersArray = _.shuffle(_.values(allMembers));
+      for (var i = 0; i < 3; i++){
+        trendingList.push(tempMembersArray.pop());
+      }
+    } else {
+      // if trendind list does not contain a congressman with memberId
+      if(!_.find(trendingList, function(member){return member.id === memberId;})){
+        // add this congressman to the beginning of tranding list
+        // and remove last congressman from the trending list
+        var member = allMembers[memberId];
+        trendingList.pop();
+        trendingList.unshift(member);
+      }
+    }
   }
 
 };

@@ -25,6 +25,9 @@ app.use(favicon(__dirname + '/../client/favicon.ico'));
 */
 var memberList = {};
 
+// storage for recently searched congressmen
+var trendingList = [];
+
 /*  memberProfile will eventually look like this after a GET request to a member_ID
   { 
     id: 412669,
@@ -63,12 +66,14 @@ var billInfo = {};
 // on a GET request to '/members/*' we see if it is a call for all members or a specific member
 app.get('/members/*', function(req, res){
   var pathObj = pathParse(req.url);
-  // if call for all, send back JSON of memberList created on server start
+  // if call for all, send back JSON of memberList and trendingListcreated on server start
   if (pathObj.base === 'all') {
-    res.send(memberList);
+    res.send({memberList: memberList, trendingList: trendingList});
   } else { // we are depending on the base being a valid member_id if it is not 'all'
     var member_id = Number(pathObj.base);
     members.getMember(member_id, function(listing){ // use callback in getMember() to populate the memberProfile object
+      // (also, add this congressman to the trending list)
+      utils.addMembersToTrendingList(member_id, memberList, trendingList);
       memberProfile = utils.makeMemberProfile(listing);
       res.send(memberProfile); // send back just the profile for that member
     });
@@ -128,6 +133,7 @@ members.getAllMembers(function(objects){
     var id = listing.person.id;
     memberList[id] = utils.makeMemberEntry(listing);
   });
+  utils.addMembersToTrendingList(null, memberList, trendingList);
 });
 
 module.exports = app;

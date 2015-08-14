@@ -8,9 +8,9 @@
         <div class="profile-party">{{ member.data.party }}</div>
         <div class="profile-description">{{ member.data.description }}</div>
         <div class="profile-social-media">
-          <span ng-if="member.data.twitterid"><a href="http://www.twitter.com/{{ member.data.twitterid }}"><img src="styles/icons/twitter.png"></a></span>
-          <span ng-if="member.data.youtubeid"><a href="http://www.youtube.com/{{ member.data.youtubeid }}"><img src="styles/icons/youtube.png"></a></span>
-          <span ng-if="member.data.website"><a href="{{ member.data.website }}"><img src="styles/icons/site.png"></a></span>
+          <span ng-if="member.data.twitterid"><a href="http://www.twitter.com/{{ member.data.twitterid }}"><img src="images/icons/twitter.png"></a></span>
+          <span ng-if="member.data.youtubeid"><a href="http://www.youtube.com/{{ member.data.youtubeid }}"><img src="images/icons/youtube.png"></a></span>
+          <span ng-if="member.data.website"><a href="{{ member.data.website }}"><img src="images/icons/site.png"></a></span>
           <!-- <span ng-if="member.data.phone"><img src="styles/icons/phone.png" alt="{{ member.data.phone }}"></span> -->
         </div>
       </div>
@@ -55,7 +55,7 @@
         <div class="bill_text col-sm-8 col-sm-offset-1">
           <span class="bill-question">
             <p>
-              <a href="{{ bill.thomas_link }}">{{ bill.bill_question }}</a>
+              <a href="{{ bill.link }}" target="_blank">{{ bill.bill_question }}</a>
             </p>
           </span>
           <span class="bill-details" ng-if="bill.bill_question_details">
