@@ -82,7 +82,11 @@ module.exports = function profileController($scope, $stateParams, Home){
    * Plot Historical Votes on Graph
    ******************************************/
    function loadGraph(memberId, memberName){
+<<<<<<< HEAD
       var url = 'https://www.govtrack.us/api/v2/vote_voter/?person=' + memberId + '&limit=1000&order_by=-created&format=json&fields=created,option__value,vote__category,vote__chamber,vote__question,vote__number,vote__percent_plus,vote__link,vote__related_bill';
+=======
+      var url = 'https://www.govtrack.us/api/v2/vote_voter/?person=' + memberId + '&limit=1000&order_by=created&format=json&fields=created,option__value,vote__category,vote__chamber,vote__question,vote__number,vote__percent_plus,vote__link,vote__related_bill';
+>>>>>>> 0b4bd7703f6117c4e270f6fddbfcde84ddeb14e2
      
       //Load Data
       d3.json(url, function (error, data) {
