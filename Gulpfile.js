@@ -34,14 +34,15 @@ var Server = require('karma').Server; // this is for testing using Karma
 
 
 var paths = {
-    scripts: ['client/**/*.js'], // previously had: '!client/lib/**/*.js'
-    styles: ['./client/assets/**/*.css', './client/assets/**/*.scss', './client/lib/**/*.css',],
-    index: './client/index.html',
-    partials: ['client/app/**/*.html', '!client/index.html'],
-    // distDev: './dist.dev',
-    // distProd: './dist.prod',
-    // distScriptsProd: './dist.prod/scripts',
-    // scriptsDevServer: 'devServer/**/*.js'
+  scripts: ['client/**/*.js'], // previously had: '!client/lib/**/*.js'
+  styles: ['./client/assets/**/*.css', './client/assets/**/*.scss', './client/lib/**/*.css'],
+  index: './client/index.html',
+  partials: ['client/app/**/*.html', '!client/index.html'],
+  images: ['client/assets/**/*.png', 'client/assets/**/*.jpg', 'client/assets/**/*.jpeg', 'client/assets/**/*.gif', 'client/assets/**/*.svg', 'client/**/*.ico']
+  // distDev: './dist.dev',
+  // distProd: './dist.prod',
+  // distScriptsProd: './dist.prod/scripts',
+  // scriptsDevServer: 'devServer/**/*.js'
 };
 
 
@@ -109,6 +110,14 @@ gulp.task('views', function() {
   .pipe(gulp.dest('public/views/'));
 });
 
+// Images task — copy all images to public folder
+gulp.task('images', function() {
+  // Image files from app/assets
+  gulp.src(paths.images)
+  // will be put in the public/images folder
+  .pipe(gulp.dest('public/images/'));
+});
+
 // Creates css files out of scss and puts them in public/styles folder
 // (also copies css files from the client folder to public/styles folder)
 gulp.task('styles', function() {
@@ -141,9 +150,12 @@ gulp.task('watch', ['lint'], function() {
   gulp.watch([paths.styles], [
     'styles'
   ]);
+  gulp.watch([paths.images], [
+    'images'
+  ]);
 });
 
-gulp.task('build', ['lint', 'browserify-prod', 'views', 'styles']);
-gulp.task('build-heroku', ['browserify-prod', 'views', 'styles']);
+gulp.task('build', ['lint', 'browserify-prod', 'views', 'styles', 'images']);
+gulp.task('build-heroku', ['browserify-prod', 'views', 'styles', 'images']);
 
-gulp.task('default', ['lint', 'browserify-dev', 'views', 'styles', 'watch']);
+gulp.task('default', ['lint', 'browserify-dev', 'views', 'styles', 'images', 'watch']);
