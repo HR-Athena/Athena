@@ -51,7 +51,7 @@ describe("Profile controller", function() {
 
     angular.mock.inject(function($rootScope, $controller) {
       scope = $rootScope.$new();
-      ctrl = $controller('profileController', { 
+      ctrl = $controller('profileController', {
         $scope: scope,
         $stateParams: $stateParams,
         Home: Home
@@ -81,16 +81,26 @@ describe("Profile controller", function() {
       Home.getMember.restore(); // remove spy
     });
 
-
-
-
-    // it("redirects to the 'profile' state and passes the correct id", function(){
-    //   scope.memberSearch = {id: 1};
-    //   scope.$digest();
-    //   scope.gotoMember();
-    //   expect($state.go).to.have.been.calledWith('profile', {id: 1});
-    // });
+    it("cleans the $scope.addMember model", function(){
+      scope.addMember = {id: 1};
+      scope.$digest();
+      scope.loadMember();
+      expect(scope.addMember).to.equal(null);
+    });
 
   });
+
+
+  describe("removePolitician function", function() {
+    
+    it("removes the second congressman’s id", function(){
+      scope.secondMember = {data: {id: 1}};
+      scope.$digest();
+      scope.removePolitician();
+      expect(scope.secondMember.data.id).to.equal(null);
+    });    
+
+  });
+
 
 });
