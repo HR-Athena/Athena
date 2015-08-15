@@ -8,6 +8,7 @@ $tan: #fdf498;
 $green: #7bc043;
 $blue: #0392cf;
 $gray: #bbbbbb;
+$black: #000000;
 
 $red-rgb: (238,64,53);
 $green-rgb: (123,192,67);
@@ -38,7 +39,8 @@ body {
   
   a {
     font-style: none;
-    color: $gray;
+    text-decoration: none;
+    color: $black;
   }
 }
 
@@ -48,7 +50,23 @@ body {
 
 a {
   font-style: none;
+  text-decoration: none;
   color: $blue;
+}
+
+.footer {
+
+  hr {
+    margin: 40px 0 5px 0;
+  }
+}
+
+/*
+Image Styling
+*/
+
+.member-profile-picture, .second-member-profile-pic, .home-profile-pic {
+  @include border-radius(20px);
 }
 
 /*
@@ -70,6 +88,20 @@ Home Template Style
     }
 }
 
+.home-profile {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 115%;
+  letter-spacing: .75px;
+  font-weight: 500;
+
+  div {
+    margin-top: 5px;
+    text-align: center;
+  }
+}
+
+
 /*
 Profile Template Style
 */
@@ -86,10 +118,6 @@ Profile Template Style
 
 .member-data, .second-member-data {
   display: inline-block;
-
-  .member-profile-picture, .second-member-profile-pic {
-    @include border-radius(20px);
-  }
 }
 
 .member-data {
@@ -127,7 +155,8 @@ Profile Template Style
   button {
     position: relative;
     float: right;
-    margin: -3px -8px 0 0;
+    margin: 5px auto 0 auto;
+
   }
   
   .second-profile-data {
@@ -174,13 +203,15 @@ Bills Styling
 
 .member-vote {
   position: relative;
-  display: inline-block;
+  /*display: inline-block;*/
   text-align: center;
   vertical-align: middle;
   font-size: 120%;
+  font-weight: 600;
   margin-top: 15px;
   margin-left: 20px;
   padding: 5px;
+  background: rgba(187,187,187, 0.5);
 
   p {
     margin: 0;
@@ -190,16 +221,12 @@ Bills Styling
 
 .vote-left {
   float: left;
-  font-weight: 600;
-  background: rgba(187,187,187, 0.5);
+  vertical-align: middle;
 }
 
 .vote-right {
   float: right;
-  margin-top: 15px;
   margin-right: 20px;
-  font-weight: 600;
-  background: rgba(187,187,187, 0.5);
 }
 
 .positive {
@@ -259,14 +286,20 @@ svg {
   margin: 10px 30px;
 }
 
+.x.axis path, .x.axis line, .y.axis path, .y.axis line {
+  /*opacity: 0.75;*/
+  fill: none;
+  stroke: $gray;
+}
+
 rect {
   fill: white;
 }
 
-.tooltip {
-  position: absolute;
+dl {
+  position: relative;
   width: 200px;
-  height: 150px;
+  height: 100%;
   pointer-events: none;
 }
 
