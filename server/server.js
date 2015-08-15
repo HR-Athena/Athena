@@ -66,8 +66,14 @@ var billInfo = {};
 // on a GET request to '/members/*' we see if it is a call for all members or a specific member
 app.get('/members/*', function(req, res){
   var pathObj = pathParse(req.url);
+  if (pathObj.dir === '/members/historic') {
+    var member_id = Number(pathObj.base);
+    members.getMemberHistoricVotes(member_id, function(listing){
+      res.send(listing);
+    });
+  }
   // if call for all, send back JSON of memberList and trendingListcreated on server start
-  if (pathObj.base === 'all') {
+  else if (pathObj.base === 'all') {
     res.send({memberList: memberList, trendingList: trendingList});
   } else { // we are depending on the base being a valid member_id if it is not 'all'
     var member_id = Number(pathObj.base);

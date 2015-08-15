@@ -67,6 +67,20 @@ module.exports = function homeFactory($http){
     });
   }
 
+  /******************************************************
+  * Load Historic Votes from server to populate D3 Graph
+  *******************************************************/
+
+  function getHistoricVotes(id){
+    return $http({
+      method: 'GET',
+      url: '/members/historic/'+id,
+    })
+    .then(function(res){
+      return res.data;
+    });
+  }
+
   /*******************************************
    * Expose factory functions to the controller
    ******************************************/
@@ -77,7 +91,8 @@ module.exports = function homeFactory($http){
     getAllMembers: getAllMembers,
     getMember: getMember,
     getMemberVotes: getMemberVotes,
-    getBillDetails: getBillDetails 
+    getBillDetails: getBillDetails,
+    getHistoricVotes: getHistoricVotes
   });
 
 };
