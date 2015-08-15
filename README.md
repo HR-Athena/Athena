@@ -34,7 +34,7 @@
 ## Development
 
 ### Setup
-Have `gulp` inslalled
+Have `gulp` installed
 
 Enter `npm start` in one terminal window
 
