@@ -72,16 +72,19 @@ describe("Utils controller", function() {
       1: {id: 1, value: 'foo'},
       2: {id: 2, value: 'bar'}, 
       3: {id: 3, value: 'baz'}, 
-      4: {id: 4, value: 'fizz'}
+      4: {id: 4, value: 'qux'},
+      5: {id: 5, value: 'fizz'},
+      6: {id: 6, value: 'buzz'},
+      7: {id: 7, value: 'ping'},
+      8: {id: 8, value: 'pong'},
+      9: {id: 9, value: 'bla'}
     };
     var trendingList;
     
-    it("puts 3 congressmen into the trending list if congressman's id is not provided", function(){
+    it("puts 8 congressmen into the trending list if congressman's id is not provided", function(){
       trendingList = [];
-      console.log('trending list before running function', trendingList);
       utils.addMembersToTrendingList(null, members, trendingList);
-      console.log('trending list after running function', trendingList);
-      expect(trendingList.length).to.equal(3);
+      expect(trendingList.length).to.equal(8);
     });
 
 

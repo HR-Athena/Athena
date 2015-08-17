@@ -100,12 +100,9 @@ module.exports = {
   addMembersToTrendingList: function(memberId, allMembers, trendingList){
     if(!memberId){ // creates the initial trending list
       var tempMembersArray = _.shuffle(_.values(allMembers));
-      for (var i = 0; i < 3; i++){
-        console.log("i equals to", i);
+      for (var i = 0; i < 8; i++){
         trendingList.push(tempMembersArray.pop());
-        console.log("trendingList in for-loop", trendingList);
-      }
-      console.log("trendingList after for-loop", trendingList);
+     }
     } else {
       // if trendind list does not contain a congressman with memberId
       if(!_.find(trendingList, function(member){return member.id === memberId;})){
