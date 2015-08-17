@@ -108,6 +108,10 @@ Home Template Style
 Profile Template Style
 */
 
+.profiles-fix {
+  height: 150px;
+}
+
 .profiles {
   padding-top: 20px;
 }
@@ -144,6 +148,18 @@ Profile Template Style
 
     }
   }
+}
+
+.first-profile-text {
+  text-align: left;
+}
+
+.second-profile-text {
+  text-align: right;
+}
+
+.center-align {
+  text-align: center;
 }
 
 .second-member-data {
