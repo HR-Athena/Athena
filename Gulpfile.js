@@ -135,7 +135,7 @@ gulp.task('styles', function() {
 gulp.task('test-backend', function () {
   return gulp.src(paths.backendTests, {read: false})
   // gulp-mocha needs filepaths so you can't have any plugins before it 
-    .pipe(mocha({reporter: 'nyan'}));
+    .pipe(mocha({reporter: 'spec'}));
 });
 
 // Runs tests for the client side once and exits
