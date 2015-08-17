@@ -66,8 +66,10 @@ var billInfo = {};
 // on a GET request to '/members/*' we see if it is a call for all members or a specific member
 app.get('/members/*', function(req, res){
   var pathObj = pathParse(req.url);
+  // if call for historic votes, send back votes for politician to populate D3 graph of votes
   if (pathObj.dir === '/members/historic') {
     var member_id = Number(pathObj.base);
+    // We are not formatting the returned object
     members.getMemberHistoricVotes(member_id, function(listing){
       res.send(listing);
     });

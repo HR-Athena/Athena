@@ -1,11 +1,7 @@
 var govTrack = require('govtrack-node');
 var Promise = require('bluebird');
-// var utils = require('./utilController');
 
 var promiseGov = Promise.promisifyAll(govTrack);
-// for (var keys in promiseGov) console.log(keys);
-// console.log(promiseGov.findRoleAsync);
-
 
 module.exports = {
   
