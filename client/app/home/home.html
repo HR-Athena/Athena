@@ -1,4 +1,5 @@
 <!-- Home View-->
+
 <div class="col-sm-8 col-sm-offset-2" > 
   <div class="col-sm-6 col-sm-offset-3 member-search">
     <input type="text" class="form-control" placeholder="Search by Politician Name" ng-model="memberSearch" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter: $viewValue | limitTo:5" />
@@ -9,12 +10,29 @@
       </div>
     </div>
   </div>
-  <div id="map" style="width: 300px; height: 300px;"></div>
+  <!-- Member View-->
   <div class="col-sm-8 col-sm-offset-2">
+    <div>
+    <p>Starting Table</p>
+      <table>
+        <tbody>
+          <tr ng-repeat="member in stateMembers">
+            <td>
+              <a href="/profile/{{ member.id }}"><img class="home-profile-pic" src="https://www.govtrack.us/data/photos/{{ member.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'"></a>
+            </td>
+            <td>
+              {{member.firstName}} {{member.lastName}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+    <div id="clicked-state"></div>
+    <div id="map" style="width: 600px; height: 400px;"></div>
     <h3 class="text-center">Most Recent Searches</h3>
     <div class="tranding-profiles">      
       <div class="trending-profile" ng-repeat="profile in trendingMembers">
-        <div class="home-profile col-sm-3">
+        <div class="home-profile col-sm-4">
           <a href="/profile/{{ profile.id }}"><img class="home-profile-pic" src="https://www.govtrack.us/data/photos/{{ profile.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'"></a>
           <div>{{ profile.title }}</div>
         </div>
@@ -22,8 +40,4 @@
     </div>
   </div>
 </div>
-<script>
-$(document).ready(function() {
-    $('#map').usmap({});
-  });
-</script>
+
