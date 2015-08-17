@@ -1,8 +1,6 @@
 var app  = require('../../server/server.js');
 var members = require('../../server/memberController');
-var bills = require('../../server/billController');
 var utils = require('../../server/utilController');
-var Bluebird = require('bluebird');
 var chai = require('chai');
 var sinon = require("sinon");
 var sinonChai = require("sinon-chai");
@@ -29,18 +27,43 @@ describe("Basic functionality:", function() {
       });    
   });
 
-  it("responds with a member object to requests to '/members/:id'", function(done){
+  it("responds to requests to '/members/:id' with a member object", function(done){
+    /* members.getMember will receive a congressman object form the govtrack site
+    and this object will be formatted by utils.makeMemberProfile,
+    so whatever utils.makeMemberProfile returns must exist in the response */
     sinon.stub(members, 'getMember', function(id, callback){callback();});
-    utils.makeMemberProfile = sinon.stub().returns({foo: 'bar'});
-    utils.addMembersToTrendingList = sinon.stub();
+    sinon.stub(utils, 'makeMemberProfile', function(listing){return {foo: 'bar'};});
+    sinon.stub(utils, 'addMembersToTrendingList');
     request(app).get('/members/1')
       .expect(200)
       .end(function(err, res){
         expect(members.getMember).to.have.been.calledOnce;
         expect(res.body).to.eql({foo: 'bar'});
+        members.getMember.restore();
+        utils.makeMemberProfile.restore();
+        utils.addMembersToTrendingList.restore();
         done();
-      });    
+      });
   });
 
+  it("responds to requests to '/votes/:id' with a memberVotes object", function(done){
+    /* members.members.getMemberVotes will receive an array of congressman votes
+    which will be formatted by utils.makeVoteInfo,
+    so response body should be an array of whatever utils.makeVoteInfo returns */
+    sinon.stub(members, 'getMemberVotes', function(id, callback){
+      Promise.resolve([{}]).then(callback);
+    });
+    sinon.stub(utils, 'makeVoteInfo', function(){return {foo: 'bar'};});
+    request(app).get('/votes/1')
+      .expect(200)
+      .end(function(err, res){
+        expect(members.getMemberVotes).to.have.been.calledOnce;
+        expect(res.body).to.eql([{foo: 'bar'}]);
+        utils.makeVoteInfo.restore();
+        done();
+      });
+    // members.getMemberVotes.restore();
+    // utils.makeVoteInfo.restore();
+  });
 
 });
