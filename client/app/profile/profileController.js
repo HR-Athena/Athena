@@ -87,43 +87,55 @@ module.exports = function profileController($scope, $stateParams, Home){
           //Parse date / time
           var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
 
-          //Pretty Dat Format
+          //Pretty Date Format - Used for tooltip date
           var prettyDate = d3.time.format("%B %d, %Y");
          
-          //Parse Date and coerce numbers
+          //Parse Date and coerce numbers for ease of use
           data.forEach(function(d){
             d.created = parseDate(d.created);
             d.vote.percent_plus = +d.vote.percent_plus;
           });
 
+          //Set Margin, Padding, Width and Height for SVG element
           var margin = {top: 20, right: 20, bottom: 60, left: 40},
               padding = {top: 40, right: 30, bottom: 50, left: 40},
               width = 960 - margin.left - margin.right,
               height = 500 - margin.top - margin.bottom;
 
+          //Set scale of x axis to time scale, using d.created for domain
           var xScale = d3.time.scale().range([0, width]).domain(d3.extent(data, function (d) { return d.created; }));
+          //Return created value from data
           var xValue = function(d) { return d.created; };
+          //Map returned value to x scale
           var xMap = function(d) { return xScale(xValue(d)); };
+          //Format x axis
           var xAxis = d3.svg.axis().scale(xScale).orient('bottom').tickFormat(d3.time.format('%b \'%y'));
 
+          //Set scale of y axis as percentage, using domain of 0 and 100
           var yScale = d3.scale.linear().range([height, 0]).domain([0, 100]);
+          //Return the percent_plus (% in favor of bill) as integer
           var yValue = function(d) { return d.vote.percent_plus * 100; };
+          //Map returned value to y scale
           var yMap = function(d) { return yScale(yValue(d)); };
+          //Format y axis
           var yAxis = d3.svg.axis().scale(yScale).orient('left').ticks(3);    
 
+          //Create zoom behavior that calls zoomed function
           var zoom = d3.behavior.zoom()
               .x(xScale)
               .y(yScale)
               .scaleExtent([1, 10])
               .on("zoom", zoomed);
 
+          //Append svg to graph element with sizing
           var vis = d3.select(".graph").append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
             .append("g")
               .attr("transform", "translate(" + padding.left + "," + padding.top + ")")
+              //Make svg element 'zoomable'
               .call(zoom);
-              
+
           vis.append("rect")
               .attr("width", width)
               .attr("height", height);
@@ -214,13 +226,17 @@ module.exports = function profileController($scope, $stateParams, Home){
 
           // Controls Zoom and circle resizing
           function zoomed() {
+            //Redraw Axes
             vis.select(".x.axis").call(xAxis);
             vis.select(".y.axis").call(yAxis);
+            //Shrink circles based on zoom scale, will enlarge on zoom out
             svg.selectAll('circle')
              .attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
              .attr('r', 3.5 / d3.event.scale );
           }
-        }).catch(function(err){
+        })
+        //Catch error from promise
+        .catch(function(err){
           throw err;
         });
    }
