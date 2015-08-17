@@ -69,7 +69,9 @@ describe("Utils controller", function() {
     
     it("puts 3 congressmen into the trending list if congressman's id is not provided", function(){
       trendingList = [];
+      console.log('trending list before running function', trendingList);
       utils.addMembersToTrendingList(null, members, trendingList);
+      console.log('trending list after running function', trendingList);
       expect(trendingList.length).to.equal(3);
     });
 

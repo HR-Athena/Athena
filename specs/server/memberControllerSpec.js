@@ -7,6 +7,11 @@ var expect = chai.expect;
 chai.use(sinonChai);
 
 describe("Members controller", function() {
+  var callback;
+
+  beforeEach(function(){
+    callback = function(){return true;};
+  });
 
   describe("getAllMembers function", function() {
     var query;
@@ -25,7 +30,7 @@ describe("Members controller", function() {
       sinon.stub(govTrack, 'findRoleAsync', function(){
         return Promise.resolve("foo");
       });
-      members.getAllMembers();
+      members.getAllMembers(callback);
       expect(govTrack.findRoleAsync).to.have.been.calledOnce;
       expect(govTrack.findRoleAsync).to.have.been.calledWith(query);
       done();
@@ -41,7 +46,7 @@ describe("Members controller", function() {
       sinon.stub(govTrack, 'findPersonAsync', function(){
         return Promise.resolve("foo");
       });
-      members.getMember(1);
+      members.getMember(1, callback);
       expect(govTrack.findPersonAsync).to.have.been.calledOnce;
       expect(govTrack.findPersonAsync).to.have.been.calledWith({id: 1});
       done();
@@ -57,7 +62,7 @@ describe("Members controller", function() {
       sinon.stub(govTrack, 'findVoteVoterAsync', function(){
         return Promise.resolve("foo");
       });
-      members.getMemberVotes(1);
+      members.getMemberVotes(1, callback);
       expect(govTrack.findVoteVoterAsync).to.have.been.calledOnce;
       expect(govTrack.findVoteVoterAsync).to.have.been.calledWith({
         person: 1,

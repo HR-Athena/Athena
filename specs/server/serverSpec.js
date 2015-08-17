@@ -9,9 +9,9 @@ var expect = chai.expect;
 chai.use(sinonChai);
 
 
-describe("Basic functionality:", function() {
+describe("Server", function() {
 
-  it("loads correctly", function(done){
+  it("responds with 200 to requests to '/'", function(done){
     request(app).get('/').expect(200, done);
   });
 
