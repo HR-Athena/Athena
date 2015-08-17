@@ -1,23 +1,24 @@
 <!-- Home View-->
-<div class="col-sm-8 col-sm-offset-2" > 
-  <div class="col-sm-6 col-sm-offset-3 member-search">
-    <input type="text" class="form-control" placeholder="Search by Politician Name" ng-model="memberSearch" typeahead="person as person.firstName + ' ' + person.lastName for person in allMembers | filter: $viewValue | limitTo:5" />
-    <button class="btn btn-default" ng-click="gotoMember()"> Search </button> 
-    <div class="members" ng-hide"!model.length || selected">
-      <div class="member"  ng-click="getMember(member.id)">
-        <p class="member_name">{{ member.name }}</p>
-      </div>
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-4">
+      <input type="text" class="form-control" placeholder="Search by Politician Name" ng-model="memberSearch" typeahead="person as person.title for person in allMembers | filter: $viewValue | limitTo:10" />
+      <button class="btn btn-default" ng-click="gotoMember()"> Search </button> 
     </div>
-  </div>
-  <div class="col-sm-8 col-sm-offset-2">
-    <h3 class="text-center">Most Recent Searches</h3>
-    <div class="tranding-profiles">      
-      <div class="trending-profile" ng-repeat="profile in trendingMembers">
-        <div class="home-profile col-sm-3">
-          <a href="/profile/{{ profile.id }}"><img class="home-profile-pic" src="https://www.govtrack.us/data/photos/{{ profile.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'"></a>
-          <div>{{ profile.title }}</div>
+
+    <div class="col-xs-12 col-sm-8">
+        <h3 class="text-center">Most Recent Searches</h3>
+        <div class="row">
+          <div ng-repeat="profile in trendingMembers">
+            <div class="col-xs-6 col-sm-3 home-profile">
+              <a href="/profile/{{ profile.id }}"><img class="home-profile-pic" src="https://www.govtrack.us/data/photos/{{ profile.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'"></a>
+              <div>{{ profile.title }}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
