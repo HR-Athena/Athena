@@ -35,19 +35,11 @@ module.exports = function homeController($scope, $state, Home){
     $scope.$apply(function(){
       $scope.stateMembers = $scope.stateMembers;
     });
-
   };
 
- 
-   $('#map').usmap({
-  // The click action
+  $('#map').usmap({
   click: function(event, data) {
     $scope.getStateMembers(data.name);
-    $('#clicked-state')
-      .text('You clicked: '+data.name);
-    // $("#btnAddProfile")
-    //       .attr('ng-click', "getStateMember("+data.name+")");
-    // }
   }
  });
 
