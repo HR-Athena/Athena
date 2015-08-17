@@ -17,28 +17,24 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  Political Profiler
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  The Political Profiler was created so everyone can better understand how their senators and representative voted on the issues.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  The Political Profiler allows anyone to search for a current member of the House or Senate. A user can see details about a politician, view a graphical representation of their voting record, and compare votes between two politicians. 
 
 ## Problem ##
-  > Describe the problem your product solves.
+  Have you ever been curious about a politician's voting record; but, didn't want to spend hours searching through copious amounts of text? Now you can see an easy-to-interpret graphical representation of how a politician voted, when the vote was recorded, and how many other politicians were in favor of passing the vote. 
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
-
-## Quote from You ##
-  > A quote from a spokesperson in your company.
+  The graphical history of votes and the ability to compare politicians side-by-side will allow our users to better understand their politicians stance on the issues that are important to them.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  Just navigate your browser to http://congressmanprofile.herokuapp.com/ and start typing the name of the politician you want to learn more about them. Don't know their full name? No Problem. We've added a helper to the searches in case you can't remember.
 
-## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  Want to compare them to another politican? Just search by name and click the button to compare. You'll also be able to change the politican if you want to compare to someone else.
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  Head over to http://congressmanprofile.herokuapp.com/ and begin learning more about your favorite Senator or Representative!
