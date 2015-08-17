@@ -1,5 +1,6 @@
 //Home Controller
-
+var Raphael = require('Raphael');
+var usmap = require('usmap');
 var Home = require('./homeFactory.js');
 
 module.exports = function homeController($scope, $state, Home){
