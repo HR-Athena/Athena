@@ -41,10 +41,6 @@ var paths = {
   partials: ['client/app/**/*.html', '!client/index.html'],
   images: ['client/assets/**/*.png', 'client/assets/**/*.jpg', 'client/assets/**/*.jpeg', 'client/assets/**/*.gif', 'client/assets/**/*.svg', 'client/**/*.ico'],
   backendTests: ['specs/server/**/*.js']
-  // distDev: './dist.dev',
-  // distProd: './dist.prod',
-  // distScriptsProd: './dist.prod/scripts',
-  // scriptsDevServer: 'devServer/**/*.js'
 };
 
 
@@ -101,11 +97,6 @@ gulp.task('browserify-prod', function () {
 
 // Views task
 gulp.task('views', function() {
-  // // Get index.html
-  // gulp.src(paths.index)
-  // // Put it in the dist folder
-  // .pipe(gulp.dest('public/'));
-
   // Any other view files from app/views
   gulp.src(paths.partials)
   // Will be put in the public/views folder

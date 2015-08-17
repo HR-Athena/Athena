@@ -11,17 +11,12 @@
 
 ## Table of Contents
 
-1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
 1. [Team](#team)
 1. [Contributing](#contributing)
-
-## Usage
-
-> Some usage instructions
 
 ## Requirements
 
@@ -52,7 +47,7 @@
 - Gulp-sass: 2.0.4
 - Gulp-sourcemaps: 1.5.2
 - Gulp-uglify: 1.2.0
-- G ulp-util: 3.0.6
+- Gulp-util: 3.0.6
 - Karma: 0.13.8
 - Karma-browserify: 4.3.0
 - Karma-chrome-launcher: 0.2.0

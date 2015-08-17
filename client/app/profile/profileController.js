@@ -23,6 +23,7 @@ module.exports = function profileController($scope, $stateParams, Home){
     .then(function(data){
       member.data = data;
       member.data.age=calculateAge(new Date(member.data.birthday));
+      //Load D3 Graph when politican is added
       loadGraph(id, member.data.fullname);
       return member;
     }).then(function(member){
@@ -41,9 +42,6 @@ module.exports = function profileController($scope, $stateParams, Home){
     Home.getMemberVotes(member.data.id)
     .then(function(votes){
       member.data.votes = votes;
-      // if ($scope.test===1){
-      //   getCommonVotes ();
-      // }
     }).catch(function(err){
       throw err;
     });
@@ -61,9 +59,8 @@ module.exports = function profileController($scope, $stateParams, Home){
    ******************************************/
    $scope.loadMember = function (){
     var memberId2 = $scope.addMember.id;
-    // $scope.test = 1;
     getMember(memberId2, $scope.secondMember);
-    // Clear Member from Input
+    // Clear Member input on second politician search
     $scope.addMember = null;
    };
 
