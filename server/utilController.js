@@ -102,7 +102,9 @@ module.exports = {
       var tempMembersArray = _.shuffle(_.values(allMembers));
       for (var i = 0; i < 3; i++){
         trendingList.push(tempMembersArray.pop());
+        console.log("trendingList in for-loop", trendingList);
       }
+      console.log("trendingList after for-loop", trendingList);
     } else {
       // if trendind list does not contain a congressman with memberId
       if(!_.find(trendingList, function(member){return member.id === memberId;})){

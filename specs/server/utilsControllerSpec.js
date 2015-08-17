@@ -58,6 +58,15 @@ describe("Utils controller", function() {
 
   });
 
+
+  /*
+    addMembersToTrendingList may not be properly testable
+    (at least the first 'it' is not),
+    because when Mocha loads server.js, the code of this file gets executed,
+    the function members.getAllMembers runs, and at any moment I can get response
+    with the real members object from the govtrack api
+  */
+
   describe("addMembersToTrendingList function", function() {
     var members =  {
       1: {id: 1, value: 'foo'},
@@ -97,6 +106,7 @@ describe("Utils controller", function() {
     });
 
   });
+
 
 });
 
