@@ -101,6 +101,7 @@ module.exports = {
     if(!memberId){ // creates the initial trending list
       var tempMembersArray = _.shuffle(_.values(allMembers));
       for (var i = 0; i < 3; i++){
+        console.log("i equals to", i);
         trendingList.push(tempMembersArray.pop());
         console.log("trendingList in for-loop", trendingList);
       }
