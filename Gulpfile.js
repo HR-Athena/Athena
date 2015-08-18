@@ -50,7 +50,7 @@ var paths = {
 
 // JSHint task
 gulp.task('lint', function() {
-  gulp.src(['./client/**/*.js', '!./client/lib/**/*.js'])
+  gulp.src(['./client/**/*.js', '!./client/lib/**/*.js', '!./client/map.js'])
   .pipe(jshint())
   .pipe(jshint.reporter('default'));
 });
