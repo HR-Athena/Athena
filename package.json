@@ -23,7 +23,7 @@
   },
   "browser": {
     "Raphael": "./client/lib/us-map/lib/raphael.js",
-    "usmap": "./client/lib/us-map/jquery.usmap.js"
+    "usmap": "./client/map.js"
   },
   "browserify-shim": {
     "Raphael": "Raphael",
