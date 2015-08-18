@@ -103,6 +103,21 @@ Home Template Style
   }
 }
 
+.map-profile {
+  text-align: left;
+  font-size: 115%;
+  letter-spacing: .75px;
+  font-weight: 500;
+  overflow: hidden;
+}
+
+.map-profile-pic {
+  width: 50px;
+}
+
+table { border-spacing: 5px; } /* cellspacing */
+
+th, td { padding: 5px; } /* cellpadding */
 
 /*
 Profile Template Style

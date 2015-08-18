@@ -11,15 +11,24 @@
       <div id="map" style="width: 600px; height: 400px;"></div>
     </div>
 
-    <div class="col-sm-6 col-sm-offset-1" ng-show="isMapView">
+    <div class="col-sm-6 col-sm-offset-1" ng-show="isMapView" style="overflow:auto;height:400px;">
+      <!-- <div style="width:100%;" ng-repeat="member in stateMembers">
+        <div style="height:75px;float:left;">
+          <a href="/profile/{{ member.id }}"><img class="home-profile-pic" src="https://www.govtrack.us/data/photos/{{ member.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'"></a>
+        </div>
+        <div style="float:left;padding-left:10px;">
+          {{ member.title }}
+        </div>
+      </div> -->
+
       <table>
         <tbody>
-          <tr ng-repeat="member in stateMembers" style="height:75px">
+          <tr ng-repeat="member in stateMembers">
             <td>
-              <a href="/profile/{{ member.id }}"><img class="home-profile-pic" src="https://www.govtrack.us/data/photos/{{ member.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'" style="height:75px;"></a>
+              <a href="/profile/{{ member.id }}"><img class="map-profile-pic home-profile-pic" src="https://www.govtrack.us/data/photos/{{ member.id }}-50px.jpeg" onerror="this.src='images/icons/default.png'"></a>
             </td>
-            <td class="home-profile">
-              {{ member.title }}
+            <td class="map-profile">
+              <a href="/profile/{{ member.id }}">{{ member.title }}</a>
             </td>
           </tr>
         </tbody>
