@@ -10,7 +10,7 @@ module.exports = function homeController($scope, $state, Home){
   $scope.member = {};
   $scope.allMembers = Home.allMembers;
   $scope.trendingMembers = Home.trendingMembers;
-  $scope.isMapView = false;
+  $scope.isMapView = true;
   $scope.stateMembers = [];
 
   $scope.gotoMember = function(){

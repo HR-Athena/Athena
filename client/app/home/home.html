@@ -3,30 +3,30 @@
 <div class="container-fluid">
   <div class="row">
 
-    <div class="col-sm-5 col-sm-offset-1" ng-if="isMapView">
+    <div class="col-sm-5" ng-show="isMapView">
+      <div>
+        <button class="btn btn-default" style="float:left;" ng-click="switchView()"> Search By Name </button>
+      </div>
       <div id="clicked-state"></div>
       <div id="map" style="width: 600px; height: 400px;"></div>
     </div>
 
-    <div class="col-sm-5 col-sm-offset-1" ng-if="isMapView">
-      <div>
-        <button class="btn btn-default" style="float:right;" ng-click="switchView()"> Search By Name </button>
-      </div>
+    <div class="col-sm-6 col-sm-offset-1" ng-show="isMapView">
       <table>
         <tbody>
-          <tr ng-repeat="member in stateMembers">
+          <tr ng-repeat="member in stateMembers" style="height:75px">
             <td>
-              <a href="/profile/{{ member.id }}"><img class="home-profile-pic" src="https://www.govtrack.us/data/photos/{{ member.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'"></a>
+              <a href="/profile/{{ member.id }}"><img class="home-profile-pic" src="https://www.govtrack.us/data/photos/{{ member.id }}-100px.jpeg" onerror="this.src='images/icons/default.png'" style="height:75px;"></a>
             </td>
-            <td>
-              {{member.firstName}} {{member.lastName}}
+            <td class="home-profile">
+              {{ member.title }}
             </td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="col-sm-10 col-sm-offset-1" ng-if="!isMapView">
+    <div class="col-sm-10 col-sm-offset-1" ng-show="!isMapView">
       <div>
         <input type="text" class="form-control" placeholder="Search by Politician Name" ng-model="memberSearch" typeahead="person as person.title for person in allMembers | filter: $viewValue | limitTo:10" />
         <button class="btn btn-default" ng-click="gotoMember()"> Search </button>
