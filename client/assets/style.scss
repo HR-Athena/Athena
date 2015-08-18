@@ -94,6 +94,8 @@ Home Template Style
   font-size: 115%;
   letter-spacing: .75px;
   font-weight: 500;
+  height: 150px;
+  overflow: hidden;
 
   div {
     margin-top: 5px;
@@ -101,10 +103,29 @@ Home Template Style
   }
 }
 
+.map-profile {
+  text-align: left;
+  font-size: 115%;
+  letter-spacing: .75px;
+  font-weight: 500;
+  overflow: hidden;
+}
+
+.map-profile-pic {
+  width: 50px;
+}
+
+table { border-spacing: 5px; } /* cellspacing */
+
+th, td { padding: 5px; } /* cellpadding */
 
 /*
 Profile Template Style
 */
+
+.profiles-fix {
+  height: 150px;
+}
 
 .profiles {
   padding-top: 20px;
@@ -142,6 +163,18 @@ Profile Template Style
 
     }
   }
+}
+
+.first-profile-text {
+  text-align: left;
+}
+
+.second-profile-text {
+  text-align: right;
+}
+
+.center-align {
+  text-align: center;
 }
 
 .second-member-data {
