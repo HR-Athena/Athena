@@ -89,3 +89,42 @@ View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+
+
+## Road Map
+
+Questions:
+- what database management system are we using?
+- are we deploying on Heroku? something else?
+
+
+Back-end team:
+- implement a database
+- when a user searches for a senator, check if that person has already been stored
+- if not, grab query the api for that person and store it in the database
+
+
+Stretch:
+- research into getting bulk data of bills for keywords
+- if we can get the keywords from bulk calls, try storing bills from limited time period (ie last 30 days) for easy keyword-searching
+- on user searching for a keyword, query the database for recent bills with that keyword, then store in the database for future searches
+
+
+
+Front-end team:
+- implement geolocation to find the user's state
+- show/suggest senators for that state
+- remove 'recent searches'? is that a useful feature? or just place the senators for the user's location above that section
+- or combine the two features and make a suggested senators based on location first and last searched second
+- maybe start with a naive approach first (just based on location with api call), and then expand it later if we feel it would be worthwhile enough to the user based on the time it would take the implement it
+
+- research development with heroku (any limitations for database/storage?)
+
+
+Stretch:
+- add ui improvements/slight design
+
+
+
+
