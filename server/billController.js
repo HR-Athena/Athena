@@ -22,7 +22,7 @@ module.exports = {
 
   //query should be an object with key value pairs representing the search field and query
   getBillsBySearch: function(query, callback) {
-    promiseGov.findVoteAsync(query)
+    promiseGov.findBillAsync(query)
       .then(function(res){
         callback(res.objects);
       })
