@@ -4,7 +4,7 @@
 <!--Begin Bill Search Form-->
   <div style="text-align:center">
     <input type="text" class="form-control" placeholder="Bill Search"/>
-    <button class="btn btn-default" ng-click="getAllBills()"> Search </button>
+    <button class="btn btn-default" ng-click=""> Search </button>
   </div>
 <!--End Bill Search Form-->
 
@@ -15,24 +15,24 @@
       <div class="bill_text col-sm-8 col-sm-offset-1">
         <span class="bill-question">
           <p>
-            <a href="{{ bill.link }}" target="_blank">{{ bill.bill_question }}</a>
+            <h4><a href="{{ bill.link }}" target="_blank">{{ bill.display_number}}</a></h4>
           </p>
         </span>
             <!-- Show Bill Details if available -->
-        <span class="bill-details" ng-if="bill.bill_question_details">
+        <span class="bill-details" ng-if="bill.title_without_number">
           <p>
-            Details: {{ bill.bill_question_details }}
+            {{ bill.title_without_number }}
           </p>
         </span>
             <!-- Show Default Details if none available -->
-        <span class="bill-details" ng-if="!bill.bill_question_details">
+        <span class="bill-details" ng-if="!bill.title_without_number">
           <p>
             Details: No Details Available
           </p>
         </span>
         <span class="bill_status">
           <p>
-            Result: {{ bill.result }}
+            Result: {{ bill.current_status }}
           </p>
         </span>
       </div>
