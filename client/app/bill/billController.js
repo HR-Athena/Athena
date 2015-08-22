@@ -3,7 +3,8 @@ module.exports = function billController($scope, Home){
   $scope.congresses = [];
   $scope.searchField = "";
   $scope.searchHeader = "";
-  $scope.query = {order_by: '-current_status_date'};
+  $scope.query = {order_by: '-current_status_date', offset: 0};
+  $scope.displayFilter = false;
   $scope.dropdownOne = 'Congress';
     var ending = [[0,''], [1,'st'], [2,'nd'], [3,'rd'], [4,'th'], [5,'th'], [6,'th'], [7,'th'], [8,'th'], [9,'th'],
                   [10, 'th'], [11, 'th'], [12, 'th'], [13, 'th'], [14, 'th'], [15, 'th'], [16, 'th'], [17, 'th'], [18, 'th'], [19, 'th'],
@@ -23,19 +24,26 @@ module.exports = function billController($scope, Home){
   }
     
 
-  $scope.getAllBills = function(){
+  $scope.getAllBills = function(offset){
+    if (offset === undefined){
+      offset = 0;
+    }
+    if ($scope.searchField === "" && $scope.query.q){
+      delete $scope.query.q;
+    }
     if ($scope.searchField !== ""){
       $scope.query.q = $scope.searchField;
-      delete $scope.query.order_by;
     }
     if ($scope.query.congress === undefined && $scope.query.q === undefined){
       alert('Please enter a query');
       return;
     }
+    $scope.query.offset += offset;
     console.log($scope.query);
     Home.getAllBills($scope.query)
     .then(function(res){
       console.log(res);
+      $scope.displayFilter = true;
       $scope.bills = [];
       $scope.searchHeader = $scope.dropdownOne + ' ' + $scope.searchField;
       angular.forEach(res, function(bill){
