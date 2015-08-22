@@ -144,15 +144,17 @@ app.get('/billvotes/*', function(req, res){
   var bill_id = Number(pathObj.base);
   var location = [];
   var category = [];
+  var required = [];
   var votes = [];
   bills.getBillInformation(bill_id, function(listing){
     listing.objects.forEach(function(vote){
       location.push(vote.chamber_label);
       category.push(vote.category_label);
+      required.push(vote.required);
       bills.getBillVoters(vote.id, function(rawVoters){
         votes.push(rawVoters.objects);
         if(votes.length === listing.objects.length) {
-          res.send(utils.makeBillVoteStats(location, votes, category));
+          res.send(utils.makeBillVoteStats(location, votes, category, required));
         }
       });
     });

@@ -127,45 +127,40 @@ module.exports = {
     }
   },
 
-  makeBillVoteStats: function(chambers, sessions, categories){
+  makeBillVoteStats: function(chambers, sessions, categories, required){
     var billVotes = [];
     sessions.forEach(function(session, i){
       var voteInfo = {};
       voteInfo.chamber = chambers[i];
       voteInfo.category = categories[i];
-      voteInfo.democratYea = 0;
-      voteInfo.democratNay = 0;
-      voteInfo.democratNull = 0;
-      voteInfo.republicanYea = 0;
-      voteInfo.republicanNay = 0;
-      voteInfo.republicanNull = 0;
-      voteInfo.independentYea = 0;
-      voteInfo.independentNay = 0;
-      voteInfo.independentNull = 0;
+      voteInfo.required = required[i];
+      voteInfo.democrat = [0,0,0];
+      voteInfo.republican = [0,0,0];
+      voteInfo.independent = [0,0,0];
       session.forEach(function(vote){
         if(vote.option.key === '+'){
           if(vote.person_role.party === 'Democrat'){
-            voteInfo.democratYea++;
+            voteInfo.democrat[0]++;
           } else if(vote.person_role.party === 'Republican'){
-            voteInfo.republicanYea++;
+            voteInfo.republican[0]++;
           } else {
-            voteInfo.independentYea++;
+            voteInfo.independent[0]++;
           }
         } else if(vote.option.key === '-'){
           if(vote.person_role.party === 'Democrat'){
-            voteInfo.democratNay++;
+            voteInfo.democrat[1]++;
           } else if(vote.person_role.party === 'Republican'){
-            voteInfo.republicanNay++;
+            voteInfo.republican[1]++;
           } else {
-            voteInfo.independentNay++;
+            voteInfo.independent[1]++;
           }
         } else {
           if(vote.person_role.party === 'Democrat'){
-            voteInfo.democratNull++;
+            voteInfo.democrat[2]++;
           } else if(vote.person_role.party === 'Republican'){
-            voteInfo.republicanNull++;
+            voteInfo.republican[2]++;
           } else {
-            voteInfo.independentNull++;
+            voteInfo.independent[2]++;
           }
         }
       });
