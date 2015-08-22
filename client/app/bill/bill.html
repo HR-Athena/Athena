@@ -1,10 +1,22 @@
 <!-- Profile View Template -->
 
 <div class="container-fluid">
+
+<!-- Begin Dropdown 1 -->
+  <div class="btn-group" dropdown is-open="status.isopen">
+    <button id="single-button" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+      {{ dropdownOne }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="single-button" style="max-height: 250px; overflow:auto">
+      <li role="menuitem" ng-repeat="congress in congresses"><a ng-click="selectCongress(this)" href="#">{{ congress[1] }}</a></li>
+    </ul>
+  </div>
+<!-- End Dropdown 1 -->
+
 <!--Begin Bill Search Form-->
   <div style="text-align:center">
     <input type="text" class="form-control" placeholder="Bill Search"/>
-    <button class="btn btn-default" ng-click=""> Search </button>
+    <button class="btn btn-default" ng-click="getAllBills()"> Search </button>
   </div>
 <!--End Bill Search Form-->
 
