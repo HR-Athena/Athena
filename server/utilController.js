@@ -127,19 +127,23 @@ module.exports = {
     }
   },
 
-  makeBillVoteStats: function(chambers, sessions){
+  makeBillVoteStats: function(chambers, sessions, categories){
     var billVotes = [];
     sessions.forEach(function(session, i){
       var voteInfo = {};
       voteInfo.chamber = chambers[i];
+      voteInfo.category = categories[i];
       voteInfo.democratYea = 0;
       voteInfo.democratNay = 0;
+      voteInfo.democratNull = 0;
       voteInfo.republicanYea = 0;
       voteInfo.republicanNay = 0;
+      voteInfo.republicanNull = 0;
       voteInfo.independentYea = 0;
       voteInfo.independentNay = 0;
+      voteInfo.independentNull = 0;
       session.forEach(function(vote){
-        if(vote.key === '+'){
+        if(vote.option.key === '+'){
           if(vote.person_role.party === 'Democrat'){
             voteInfo.democratYea++;
           } else if(vote.person_role.party === 'Republican'){
@@ -147,13 +151,21 @@ module.exports = {
           } else {
             voteInfo.independentYea++;
           }
-        } else {
+        } else if(vote.option.key === '-'){
           if(vote.person_role.party === 'Democrat'){
             voteInfo.democratNay++;
           } else if(vote.person_role.party === 'Republican'){
             voteInfo.republicanNay++;
           } else {
             voteInfo.independentNay++;
+          }
+        } else {
+          if(vote.person_role.party === 'Democrat'){
+            voteInfo.democratNull++;
+          } else if(vote.person_role.party === 'Republican'){
+            voteInfo.republicanNull++;
+          } else {
+            voteInfo.independentNull++;
           }
         }
       });
