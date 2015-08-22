@@ -125,6 +125,41 @@ module.exports = {
         trendingList.unshift(member);
       }
     }
+  },
+
+  makeBillVoteStats: function(chambers, sessions){
+    var billVotes = [];
+    sessions.forEach(function(session, i){
+      var voteInfo = {};
+      voteInfo.chamber = chambers[i];
+      voteInfo.democratYea = 0;
+      voteInfo.democratNay = 0;
+      voteInfo.republicanYea = 0;
+      voteInfo.republicanNay = 0;
+      voteInfo.independentYea = 0;
+      voteInfo.independentNay = 0;
+      session.forEach(function(vote){
+        if(vote.key === '+'){
+          if(vote.person_role.party === 'Democrat'){
+            voteInfo.democratYea++;
+          } else if(vote.person_role.party === 'Republican'){
+            voteInfo.republicanYea++;
+          } else {
+            voteInfo.independentYea++;
+          }
+        } else {
+          if(vote.person_role.party === 'Democrat'){
+            voteInfo.democratNay++;
+          } else if(vote.person_role.party === 'Republican'){
+            voteInfo.republicanNay++;
+          } else {
+            voteInfo.independentNay++;
+          }
+        }
+      });
+      billVotes.push(voteInfo);
+    });
+    return billVotes;
   }
 
 };

@@ -142,13 +142,15 @@ app.get('/billSearch', function(req, res){
 app.get('/billvotes/*', function(req, res){
   var pathObj = pathParse(req.url);
   var bill_id = Number(pathObj.base);
+  var location = [];
   var votes = [];
   bills.getBillInformation(bill_id, function(listing){
     listing.objects.forEach(function(vote){
+      location.push(vote.chamber_label);
       bills.getBillVoters(vote.id, function(rawVoters){
         votes.push(rawVoters.objects);
         if(votes.length === listing.objects.length) {
-          res.send(votes);
+          res.send(utils.makeBillVoteStats(location, votes));
         }
       });
     });
