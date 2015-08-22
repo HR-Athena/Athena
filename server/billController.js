@@ -7,7 +7,7 @@ var promiseGov = Promise.promisifyAll(govTrack);
 module.exports = {
 
   getBillInformation: function(bill_id, callback) {
-    promiseGov.findVoteAsync({id: bill_id})
+    promiseGov.findVoteAsync({related_bill: bill_id})
       .then(function(res){
         callback(res);
       })
@@ -29,6 +29,15 @@ module.exports = {
       .catch(function(err){
         console.log('Error in getBillsBySearch:', err);
       });
-  }
+  },
 
+  getBillVoters: function(vote_id, callback) {
+    promiseGov.findVoteVoterAsync({vote: vote_id, limit: 600})
+      .then(function(res){
+        callback(res);
+      })
+      .catch(function(err){
+        console.log('Error in getBillVoters:', err);
+      });
+  }
 };
