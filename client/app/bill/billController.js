@@ -1,9 +1,11 @@
 module.exports = function billController($scope, Home){
   $scope.bills = [];
   $scope.congresses = [];
-  $scope.query = {congress: 112, order_by: '-current_status_date'};
+  $scope.searchField = "";
+  $scope.searchHeader = "";
+  $scope.query = {order_by: '-current_status_date'};
   $scope.dropdownOne = 'Congress';
-    var ending = [[0,'th'], [1,'st'], [2,'nd'], [3,'rd'], [4,'th'], [5,'th'], [6,'th'], [7,'th'], [8,'th'], [9,'th'],
+    var ending = [[0,''], [1,'st'], [2,'nd'], [3,'rd'], [4,'th'], [5,'th'], [6,'th'], [7,'th'], [8,'th'], [9,'th'],
                   [10, 'th'], [11, 'th'], [12, 'th'], [13, 'th'], [14, 'th'], [15, 'th'], [16, 'th'], [17, 'th'], [18, 'th'], [19, 'th'],
                   [20, 'th'], [21, 'st'], [22, 'nd'], [23, 'rd'], [24, 'th'], [25, 'th'], [26, 'th'], [27, 'th'], [28, 'th'], [29, 'th'],
                   [30, 'th'], [31, 'st'], [32, 'nd'], [33, 'rd'], [34, 'th'], [35, 'th'], [36, 'th'], [37, 'th'], [38, 'th'], [39, 'th'],
@@ -22,9 +24,20 @@ module.exports = function billController($scope, Home){
     
 
   $scope.getAllBills = function(){
+    if ($scope.searchField !== ""){
+      $scope.query.q = $scope.searchField;
+      delete $scope.query.order_by;
+    }
+    if ($scope.query.congress === undefined && $scope.query.q === undefined){
+      alert('Please enter a query');
+      return;
+    }
+    console.log($scope.query);
     Home.getAllBills($scope.query)
     .then(function(res){
+      console.log(res);
       $scope.bills = [];
+      $scope.searchHeader = $scope.dropdownOne + ' ' + $scope.searchField;
       angular.forEach(res, function(bill){
         $scope.bills.push(bill);
       });
@@ -35,9 +48,27 @@ module.exports = function billController($scope, Home){
   };
 
   $scope.selectCongress = function(el){
-    $scope.dropdownOne = el.congress[1];
-    $scope.query.congress = el.congress[0];
-    console.log($scope.query);
+    if (el === 'all'){
+      $scope.dropdownOne = 'Search All';
+      delete $scope.query.congress;
+    }
+    else {
+      $scope.dropdownOne = el.congress[1];
+      $scope.query.congress = el.congress[0];
+    }
   };
 
+  $scope.queryBuilder = function(){
+    var sortable = {};
+    var filterableWithoutOperators = {
+      q: ""
+    };
+    var filterableWithOperators = {};
+    var other = {};
+
+  };
+
+
+
 };
+
