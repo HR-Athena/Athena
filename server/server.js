@@ -136,6 +136,24 @@ app.get('/billSearch', function(req, res){
   });
 });
 
+// on a GET request to 'billvotes/*', we are couting on the * to be a valid number for a bill_ID
+// we use path to parse out the base of the url which will be the bill_ID as a string
+app.get('/billvotes/*', function(req, res){
+  var pathObj = pathParse(req.url);
+  var bill_id = Number(pathObj.base);
+  var votes = [];
+  bills.getBillInformation(bill_id, function(listing){
+    listing.objects.forEach(function(vote){
+      bills.getBillVoters(vote.id, function(rawVoters){
+        votes.push(rawVoters.objects);
+        if(votes.length === listing.objects.length) {
+          res.send(votes);
+        }
+      });
+    });
+  });
+});
+
 app.get('/*', function(req, res){
   res.render('index.ejs');
 });
