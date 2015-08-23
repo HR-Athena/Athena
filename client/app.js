@@ -38,6 +38,11 @@ var congressmanprofile = angular.module('congressmanprofile', [
       url: '/bill',
       templateUrl: 'views/bill/bill.html',
       controller: 'billController'
+    })
+    .state('id', {
+      url: '/bill/:id',
+      templateUrl: 'views/bill/id.html',
+      controller: 'idController'
     });
 
 });
