@@ -6,7 +6,7 @@ module.exports = function idController($scope, $stateParams, Home){
     console.log(id);
     Home.getBillDetails(id)
       .then(function(res){
-        $scope.bill = res.objects[0];
+        $scope.bill = res;
         if ($scope.bill === undefined){
           $scope.failMessage = "We didn't find any info for that bill :(";
         }
