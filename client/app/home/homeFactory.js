@@ -2,7 +2,6 @@
 module.exports = function homeFactory($http){
 
   var allMembers = [];
-  //var allBills = [];
   var trendingMembers = [];
   getAllMembers();
 
