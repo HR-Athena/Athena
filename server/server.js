@@ -142,13 +142,19 @@ app.get('/billSearch', function(req, res){
 app.get('/billvotes/*', function(req, res){
   var pathObj = pathParse(req.url);
   var bill_id = Number(pathObj.base);
+  var location = [];
+  var category = [];
+  var required = [];
   var votes = [];
-  bills.getBillInformation(bill_id, function(listing){
+  bills.getBillVoteInformation(bill_id, function(listing){
     listing.objects.forEach(function(vote){
+      location.push(vote.chamber_label);
+      category.push(vote.category_label);
+      required.push(vote.required);
       bills.getBillVoters(vote.id, function(rawVoters){
         votes.push(rawVoters.objects);
         if(votes.length === listing.objects.length) {
-          res.send(votes);
+          res.send(utils.makeBillVoteStats(location, votes, category, required));
         }
       });
     });
