@@ -146,7 +146,7 @@ app.get('/billvotes/*', function(req, res){
   var category = [];
   var required = [];
   var votes = [];
-  bills.getBillInformation(bill_id, function(listing){
+  bills.getBillVoteInformation(bill_id, function(listing){
     listing.objects.forEach(function(vote){
       location.push(vote.chamber_label);
       category.push(vote.category_label);
