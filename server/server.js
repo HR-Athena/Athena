@@ -140,6 +140,7 @@ app.get('/billSearch', function(req, res){
 // on a GET request to 'billvotes/*', we are couting on the * to be a valid number for a bill_ID
 // we use path to parse out the base of the url which will be the bill_ID as a string
 app.get('/billvotes/*', function(req, res){
+  console.log('here');
   var pathObj = pathParse(req.url);
   var bill_id = Number(pathObj.base);
   var location = [];
@@ -147,17 +148,37 @@ app.get('/billvotes/*', function(req, res){
   var required = [];
   var votes = [];
   bills.getBillVoteInformation(bill_id, function(listing){
-    listing.objects.forEach(function(vote){
-      location.push(vote.chamber_label);
-      category.push(vote.category_label);
-      required.push(vote.required);
-      bills.getBillVoters(vote.id, function(rawVoters){
-        votes.push(rawVoters.objects);
-        if(votes.length === listing.objects.length) {
-          res.send(utils.makeBillVoteStats(location, votes, category, required));
-        }
-      });
-    });
+    var length = listing.objects.length;
+    if(length > 0){
+      var sync = function(){
+        var vote = listing.objects.shift();
+        location.push(vote.chamber_label);
+        category.push(vote.category_label);
+        required.push(vote.required);
+        bills.getBillVoters(vote.id, function(rawVoters){
+          votes.push(rawVoters.objects);
+          if(votes.length === length) {
+            res.send(utils.makeBillVoteStats(location, votes, category, required));
+          } else {
+            sync();
+          }
+        });
+      };
+      sync();
+    } else {
+      res.send(null);
+    }
+    // listing.objects.forEach(function(vote){
+    //   location.push(vote.chamber_label);
+    //   category.push(vote.category_label);
+    //   required.push(vote.required);
+    //   bills.getBillVoters(vote.id, function(rawVoters){
+    //     votes.push(rawVoters.objects);
+    //     if(votes.length === listing.objects.length) {
+    //       res.send(utils.makeBillVoteStats(location, votes, category, required));
+    //     }
+    //   });
+    // });
   });
 });
 
