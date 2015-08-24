@@ -130,7 +130,6 @@ module.exports = {
   makeBillVoteStats: function(chambers, sessions, categories, required){
     var billVotes = [];
     sessions.forEach(function(session, i){
-      console.log(session.length);
       var voteInfo = {};
       voteInfo.chamber = chambers[i];
       voteInfo.category = categories[i];
