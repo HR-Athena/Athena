@@ -15,6 +15,7 @@ var congressmanprofile = angular.module('congressmanprofile', [
   'ui.bootstrap',
   'angular-loading-bar', 
   'ngAnimate',
+  'chart.js',
   home.name,
   profile.name,
   bill.name

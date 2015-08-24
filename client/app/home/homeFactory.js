@@ -96,6 +96,19 @@ module.exports = function homeFactory($http){
     });
   }
 
+  /******************************************************
+  * Load all votes on bill from server
+  *******************************************************/
+
+  function getBillVotes(id){
+    return $http({
+      method: 'GET',
+      url: '/billvotes/' + id
+    })
+    .then(function(res){
+      return res.data;
+    });
+  }
   /*******************************************
    * Expose factory functions to the controller
    ******************************************/
@@ -108,7 +121,8 @@ module.exports = function homeFactory($http){
     getMemberVotes: getMemberVotes,
     getBillDetails: getBillDetails,
     getHistoricVotes: getHistoricVotes,
-    getAllBills: getAllBills
+    getAllBills: getAllBills,
+    getBillVotes: getBillVotes
   });
 
 };

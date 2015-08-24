@@ -42,7 +42,7 @@ module.exports = {
   },
 
   getBillVoters: function(vote_id, callback) {
-    promiseGov.findVoteVoterAsync({vote: vote_id, limit: 600})
+    promiseGov.findVoteVoterAsync({vote: vote_id, limit: 500})
       .then(function(res){
         callback(res);
       })
