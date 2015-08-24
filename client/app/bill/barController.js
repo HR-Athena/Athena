@@ -1,10 +1,10 @@
 module.exports = function barController($scope, $stateParams, Home) {
   $scope.id = undefined;
   $scope.index = 0;
-  $scope.votes = {};
+  $scope.votes = [];
   $scope.labels = ['Yea', 'Nay', 'No Vote'];
-  $scope.series = ['Democrat', 'Independent', 'Republican'];
-
+  $scope.series = ['Democrat', 'Republican', 'Independent'];
+  $scope.colours = ['#0000FF', '#FF0000', '#6600CC'];
   $scope.data = [[],[],[]];
 
   $scope.getBillVotes = function(id){
@@ -28,8 +28,8 @@ module.exports = function barController($scope, $stateParams, Home) {
     $scope.index = index;
     var data = $scope.votes[index];
     $scope.data[0] = data.democrat;
-    $scope.data[1] = data.independent;
-    $scope.data[2] = data.republican;
+    $scope.data[1] = data.republican;
+    $scope.data[2] = data.independent;
   };
 
   $scope.getBillVotes($scope.id);

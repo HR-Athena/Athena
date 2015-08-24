@@ -6,7 +6,7 @@
     <div ng-controller="barController">
       <button class="btn btn-default" ng-repeat="vote in votes track by $index" ng-click="changeIndex($index)">{{vote.chamber}}: {{vote.category}}</button>
       <div style="margin: 0 20% 0 20%;">
-        <canvas id="bar" class="chart chart-bar" data="data" labels="labels" series="series" />
+        <canvas id="bar" class="chart chart-bar" data="data" labels="labels" series="series" colours="colours" legend="true"/>
       </div>
     </div>
   </div>
